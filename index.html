@@ -38,14 +38,6 @@
         <span class="app-subtitle">Shuddh Shakahari Rasoi</span>
       </div>
     </div>
-    <div class="header-actions">
-      <button id="proTopBtn" class="pro-pill-btn" onclick="switchTab('pro')" title="Opal Rasoi Pro Features">
-        <span class="pro-icon">💎</span> <span class="pro-text">Pro</span>
-      </button>
-      <button id="aboutTopBtn" class="icon-btn" aria-label="About and Legal" title="About & Legal Disclaimer">
-        ℹ️
-      </button>
-    </div>
   </header>
 
   <!-- Main Views Container -->
@@ -54,13 +46,18 @@
     <!-- VIEW 1: TODAY'S CURATED MENU -->
     <section id="view-today" class="app-view active">
       
-      <!-- Sleek Top Action Bar -->
+      <!-- Date Bar & Big Shuffle Button -->
       <div class="today-top-bar">
         <div class="today-date-info">
           <span class="live-date-pill" id="currentDatePill">Today's Menu • आज का खाना</span>
         </div>
-        <button id="replanAllBtn" class="replan-pill-btn" title="Shuffle all 3 meals">
-          <span class="btn-icon">🔄</span> Re-plan All
+      </div>
+
+      <!-- Prominent BIG SHUFFLE Button -->
+      <div class="shuffle-banner-container">
+        <button id="replanAllBtn" class="big-shuffle-btn" title="Shuffle all 3 meals while skipping dishes cooked in last 3 days">
+          <span class="shuffle-icon">🔄</span>
+          <span class="shuffle-text">SHUFFLE ALL MEALS (मेन्यू बदलें)</span>
         </button>
       </div>
 
@@ -150,9 +147,6 @@
       </div>
     </section>
 
-
-    </section>
-
     <!-- VIEW 3: WEEKLY 7-DAY ROTATION -->
     <section id="view-weekly" class="app-view">
       
@@ -165,16 +159,20 @@
         <p class="view-subtitle">Balanced rotation of dals, vegetables, and high-protein meals.</p>
       </div>
 
-      <!-- Week Day Selector Tabs (Drastically cuts vertical clutter) -->
-      <div class="week-days-scroll">
-        <button class="day-tab active" data-day="0" onclick="selectWeeklyDay(0)">Mon</button>
-        <button class="day-tab" data-day="1" onclick="selectWeeklyDay(1)">Tue</button>
-        <button class="day-tab" data-day="2" onclick="selectWeeklyDay(2)">Wed</button>
-        <button class="day-tab" data-day="3" onclick="selectWeeklyDay(3)">Thu</button>
-        <button class="day-tab" data-day="4" onclick="selectWeeklyDay(4)">Fri</button>
-        <button class="day-tab" data-day="5" onclick="selectWeeklyDay(5)">Sat</button>
-        <button class="day-tab" data-day="6" onclick="selectWeeklyDay(6)">Sun</button>
-        <button class="day-tab" data-day="-1" onclick="selectWeeklyDay(-1)">View All</button>
+      <!-- Week Day Selector (No horizontal scroll: 7-day grid + full-width View Full Week Plan) -->
+      <div class="week-selector-container">
+        <div class="week-days-grid">
+          <button class="day-tab active" data-day="0" onclick="selectWeeklyDay(0)">Mon</button>
+          <button class="day-tab" data-day="1" onclick="selectWeeklyDay(1)">Tue</button>
+          <button class="day-tab" data-day="2" onclick="selectWeeklyDay(2)">Wed</button>
+          <button class="day-tab" data-day="3" onclick="selectWeeklyDay(3)">Thu</button>
+          <button class="day-tab" data-day="4" onclick="selectWeeklyDay(4)">Fri</button>
+          <button class="day-tab" data-day="5" onclick="selectWeeklyDay(5)">Sat</button>
+          <button class="day-tab" data-day="6" onclick="selectWeeklyDay(6)">Sun</button>
+        </div>
+        <button class="view-all-week-btn" data-day="-1" onclick="selectWeeklyDay(-1)">
+          📅 View Full Week Plan
+        </button>
       </div>
 
       <div id="weeklyPlanContainer" class="weekly-list-clean">
@@ -182,7 +180,7 @@
       </div>
     </section>
 
-    <!-- VIEW 5: KITCHEN DIARY (रसोई डायरी / MEAL HISTORY) -->
+    <!-- VIEW 4: KITCHEN DIARY (रसोई डायरी / MEAL HISTORY) -->
     <section id="view-history" class="app-view">
       <div class="view-header-clean">
         <div class="view-title-row">
@@ -209,96 +207,67 @@
       </div>
     </section>
 
-
-    <!-- VIEW 5: OPAL RASOI PRO & MONETIZATION HUB -->
-    <section id="view-pro" class="app-view">
-      
-      <!-- Pro Hero -->
-      <div class="pro-header-clean">
-        <span class="pro-badge">💎 OPAL RASOI PRO</span>
-        <h2>Stress-Free Kitchen Assistant</h2>
-        <p>Unlock domestic cook voice guides in Hindi, medical diet filters, and 1-click groceries.</p>
-      </div>
-
-      <!-- Quick Commerce Affiliate -->
-      <div class="pro-card-clean">
-        <div class="pro-card-title">
-          <span class="icon">🛒</span>
-          <div>
-            <h4>1-Click Grocery Order</h4>
-            <span class="sub">Blinkit • Zepto • Swiggy Instamart</span>
-          </div>
-        </div>
-        <p class="pro-card-desc">Need atta, rajma, or methi? Order all week's ingredients with 1 tap.</p>
-        <div class="qcom-btn-row">
-          <button class="btn-qcom blinkit" onclick="orderGrocery('Blinkit')">Blinkit ⚡</button>
-          <button class="btn-qcom zepto" onclick="orderGrocery('Zepto')">Zepto ⏱️</button>
-          <button class="btn-qcom swiggy" onclick="orderGrocery('Swiggy')">Instamart 🛵</button>
-        </div>
-      </div>
-
-      <!-- Subscription Options -->
-      <div class="pricing-cards-clean">
-        <div class="price-pill-card" id="planMonthly" onclick="selectPlan('monthly')">
-          <h5>Monthly</h5>
-          <div class="price">₹149<span>/mo</span></div>
-          <span class="sub">Cancel anytime</span>
-        </div>
-        <div class="price-pill-card active" id="planAnnual" onclick="selectPlan('annual')">
-          <span class="save-tag">SAVE 45%</span>
-          <h5>Annual</h5>
-          <div class="price">₹999<span>/yr</span></div>
-          <span class="sub">₹83/month</span>
-        </div>
-      </div>
-
-      <!-- Pro Features -->
-      <div class="pro-features-clean">
-        <div class="feature-item">
-          <span class="icon">🎧</span>
-          <div>
-            <strong>Cook Audio Guide in Hindi</strong>
-            <p>Voice steps so your household cook can listen hands-free.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <span class="icon">🩺</span>
-          <div>
-            <strong>Medical & Ayurvedic Diets</strong>
-            <p>Diabetic-friendly, low-GI, gym high-protein, and Jain modes.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <span class="icon">📄</span>
-          <div>
-            <strong>Printable Fridge Menu & WhatsApp Export</strong>
-            <p>Share weekly meal charts directly with your family.</p>
-          </div>
-        </div>
-      </div>
-
-      <button id="startTrialBtn" class="btn-pro-action">Start 7-Day Free Trial</button>
-    </section>
-
-
-    <!-- VIEW 6: ABOUT US & LEGAL DISCLAIMER -->
+    <!-- VIEW 5: ABOUT US, APP GUIDE & LEGAL NOTICE -->
     <section id="view-about" class="app-view">
       <div class="view-header-clean">
-        <h2>About & Legal Notice</h2>
-        <p class="view-subtitle">Opal Luna Labs • Purely Advisory Disclaimer</p>
+        <div class="view-title-row">
+          <h2>About Us & Information</h2>
+          <span class="badge-status">v2.4 PWA</span>
+        </div>
+        <p class="view-subtitle">Kya Banaye • Complete App Guide, Philosophy & Legal Notice</p>
       </div>
 
-      <!-- About Us Card -->
+      <!-- App Philosophy & Features Card -->
+      <div class="info-card-clean">
+        <div class="info-title-row">
+          <span class="info-icon">🍲</span>
+          <h3>Kya Banaye — Shuddh Shakahari</h3>
+        </div>
+        <p><strong>Kya Banaye</strong> is a smart, offline-first Progressive Web App designed specifically for Indian vegetarian households. It ends the daily question <em>"आज क्या बनाएं?"</em> (What should we cook today?) with zero stress and thoughtful variety.</p>
+        
+        <div class="about-highlights-grid">
+          <div class="highlight-item">
+            <span class="hi-icon">🛡️</span>
+            <div>
+              <strong>3-Day Anti-Repeat Cooldown</strong>
+              <p>Whenever you tap "आज बनाया?", that dish is locked out of daily shuffles for 3 days to guarantee variety.</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="hi-icon">🌙</span>
+            <div>
+              <strong>Kal Ki Taiyari (Advance Prep)</strong>
+              <p>Nightly reminder at 8:30 PM to soak pulses, set dahi, or prep ingredients, saving 30 minutes in the morning rush.</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="hi-icon">📅</span>
+            <div>
+              <strong>Saptahik Bhojan Yojana</strong>
+              <p>A balanced 7-day vegetarian rotation covering high-protein dals, sabzis, and seasonal home favorites.</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="hi-icon">📖</span>
+            <div>
+              <strong>Rasoi Diary (Kitchen Diary)</strong>
+              <p>Automatically records what you cooked and when, providing an organized record of household meals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator / Organization Card -->
       <div class="info-card-clean">
         <div class="info-title-row">
           <span class="info-icon">🏢</span>
-          <h3>Opal Luna Labs</h3>
+          <h3>About Opal Luna Labs</h3>
         </div>
-        <p><strong>Opal Luna Labs</strong> designs elegant software craft that solves everyday household friction points with minimalism, empathy, and speed.</p>
-        <p class="copyright-sub">© 2026 Opal Luna Labs. All rights reserved.</p>
+        <p><strong>Opal Luna Labs</strong> creates thoughtful software utilities that solve everyday household friction points with minimalism, speed, and empathy. We build privacy-focused, zero-bloat web apps with no ads and no tracking.</p>
+        <p class="copyright-sub">🔒 100% Client-Side Privacy • All data remains saved locally on your device in browser storage.</p>
       </div>
 
-      <!-- Comprehensive Legal Notice -->
+      <!-- Comprehensive Legal Notice & Medical Disclaimer -->
       <div class="info-card-clean legal-border">
         <div class="info-title-row">
           <span class="info-icon">⚖️</span>
@@ -308,7 +277,7 @@
           <li><strong>Purely Advisory:</strong> All meal ideas, recipe guidelines, cooking times, nutritional notes, and advance preparation advice are culinary suggestions for domestic convenience.</li>
           <li><strong>Zero Legal Liability:</strong> Neither this application nor Opal Luna Labs bears any legal, financial, or medical liability regarding allergic reactions, nutritional deficiencies, or health implications.</li>
           <li><strong>User Discretion Mandated:</strong> Always inspect ingredient freshness, verify food allergies, and adjust salt, spices, and oil to personal dietary tolerance.</li>
-          <li><strong>Not Medical Advice:</strong> Individuals with chronic medical conditions should consult a certified physician or dietitian.</li>
+          <li><strong>Not Medical Advice:</strong> Individuals with chronic medical conditions should consult a certified physician or dietitian before making dietary changes.</li>
         </ul>
       </div>
 
@@ -400,6 +369,10 @@
     <button class="nav-tab" data-tab="history" onclick="switchTab('history')">
       <div class="nav-indicator"><span class="nav-icon">📖</span></div>
       <span class="nav-label">रसोई डायरी</span>
+    </button>
+    <button class="nav-tab" data-tab="about" onclick="switchTab('about')">
+      <div class="nav-indicator"><span class="nav-icon">ℹ️</span></div>
+      <span class="nav-label">About Us</span>
     </button>
   </nav>
 

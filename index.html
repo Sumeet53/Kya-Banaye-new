@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aaj Kya Banega — Daily Indian Veg Meal Planner</title>
+  
+  <!-- Modern Typography: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- PWA Metadata & Theme -->
+  <meta name="theme-color" content="#0284C7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- In-App Notification Toast Banner -->
+  <div id="inAppNotificationToast" class="notification-toast hidden">
+    <div class="toast-icon">🔔</div>
+    <div class="toast-content">
+      <h5 id="toastTitle">8:30 PM Reminder</h5>
+      <p id="toastBody">Kal Ki Taiyari: Did you soak pulses or set dahi?</p>
+    </div>
+    <button class="toast-close-btn" onclick="dismissToast()">&times;</button>
+  </div>
+
+  <!-- Minimalist App Header -->
+  <header class="app-header">
+    <div class="brand-group">
+      <span class="brand-logo-icon">🍲</span>
+      <div class="brand-text">
+        <h1 class="app-title">Aaj Kya Banega</h1>
+        <span class="app-subtitle">Shuddh Shakahari Rasoi</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="aboutTopBtn" class="icon-btn" aria-label="About and Legal" title="About & Legal Disclaimer">
+        ℹ️
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Views Container -->
+  <main id="appContent" class="main-content">
+
+    <!-- VIEW 1: TODAY'S CURATED MENU -->
+    <section id="view-today" class="app-view active">
+      
+      <!-- Sleek Top Action Bar -->
+      <div class="today-top-bar">
+        <div class="today-date-info">
+          <span class="live-date-pill" id="currentDatePill">Today's Menu • आज का खाना</span>
+        </div>
+        <button id="replanAllBtn" class="replan-pill-btn" title="Shuffle all 3 meals">
+          <span class="btn-icon">🔄</span> Re-plan All
+        </button>
+      </div>
+
+      <!-- Segmented Meal Filter: Declutters view by letting user focus on 1 meal or all -->
+      <div class="segmented-meal-filter">
+        <button class="filter-chip active" data-filter="all" onclick="filterMeals('all')">✨ All (3)</button>
+        <button class="filter-chip" data-filter="breakfast" onclick="filterMeals('breakfast')">🌅 Breakfast</button>
+        <button class="filter-chip" data-filter="lunch" onclick="filterMeals('lunch')">☀️ Lunch</button>
+        <button class="filter-chip" data-filter="dinner" onclick="filterMeals('dinner')">🌙 Dinner</button>
+      </div>
+
+      <!-- Meal Cards Container (Decluttered, readable, focused) -->
+      <div class="meal-cards-container">
+        <!-- Breakfast Card -->
+        <div class="meal-card" id="breakfastCard">
+          <!-- Rendered via app.js -->
+        </div>
+
+        <!-- Lunch Card -->
+        <div class="meal-card" id="lunchCard">
+          <!-- Rendered via app.js -->
+        </div>
+
+        <!-- Dinner Card -->
+        <div class="meal-card" id="dinnerCard">
+          <!-- Rendered via app.js -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- VIEW 2: KAL KI TAIYARI (ADVANCE PREPARATION) -->
+    <section id="view-prep" class="app-view">
+      
+      <!-- Minimalist Prep Header -->
+      <div class="view-header-clean">
+        <div class="view-title-row">
+          <h2>कल की तैयारी (Advance Prep)</h2>
+          <span class="badge-status" id="prepStatusBadge">0/5 Done</span>
+        </div>
+        <p class="view-subtitle">10 minutes tonight saves 30 minutes of morning kitchen rush.</p>
+
+        <!-- Readiness Progress -->
+        <div class="prep-progress-card">
+          <div class="progress-labels">
+            <span>Tonight's Kitchen Readiness</span>
+            <strong id="prepPercentageText">0% Ready</strong>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="prepProgressBar" class="progress-bar-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sleek 8:30 PM Nightly Reminder Card -->
+      <div class="reminder-card-clean">
+        <div class="reminder-info">
+          <span class="reminder-icon">🔔</span>
+          <div>
+            <h4>8:30 PM Nightly Reminder</h4>
+            <p id="reminderStatusDesc">Daily notification to soak pulses & set dahi for tomorrow.</p>
+          </div>
+        </div>
+        <div class="reminder-controls">
+          <button id="testNotificationBtn" class="btn-test-alert" title="Test notification alert">
+            Test Alert
+          </button>
+          <label class="switch" title="Toggle 8:30 PM reminder">
+            <input type="checkbox" id="prepReminderToggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Interactive Prep Checklist -->
+      <div class="checklist-header">
+        <h3>Tonight's Tasks (रात के कार्य)</h3>
+      </div>
+      <div id="prepChecklistContainer" class="prep-list-clean">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <!-- Add Custom Prep Note -->
+      <div class="custom-prep-box-clean">
+        <input type="text" id="customPrepInput" placeholder="Add custom reminder (e.g. defrost peas)...">
+        <button id="addCustomPrepBtn" class="btn-add-prep">+ Add</button>
+      </div>
+    </section>
+
+
+    <!-- VIEW 3: PANTRY SOLVER (GHAR MEIN KYA HAI) -->
+    <section id="view-pantry" class="app-view">
+      
+      <!-- Minimalist Pantry Header -->
+      <div class="view-header-clean">
+        <div class="view-title-row">
+          <h2>घर में क्या है? (Pantry Solver)</h2>
+          <button id="clearPantryBtn" class="btn-clear-selection">Clear All</button>
+        </div>
+        <p class="view-subtitle">Select what you have in the fridge or kitchen basket.</p>
+      </div>
+
+      <!-- Category Filter Tabs for Ingredients -->
+      <div class="pantry-category-tabs">
+        <button class="pantry-cat-btn active" onclick="filterPantryCategory('all')">All</button>
+        <button class="pantry-cat-btn" onclick="filterPantryCategory('veggie')">🥬 Veggies</button>
+        <button class="pantry-cat-btn" onclick="filterPantryCategory('grain')">🌾 Dals & Grains</button>
+        <button class="pantry-cat-btn" onclick="filterPantryCategory('dairy')">🥛 Dairy & Staples</button>
+      </div>
+
+      <!-- Ingredient Chips Container -->
+      <div id="pantryChipsContainer" class="pantry-chips-clean">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <!-- Suggested Dishes Results -->
+      <div class="checklist-header">
+        <h3 id="matchedDishesHeading">Matching Meals (सुझाए गए व्यंजन)</h3>
+      </div>
+      <div id="pantryResultsContainer" class="pantry-results-clean">
+        <!-- Rendered via app.js -->
+      </div>
+    </section>
+
+
+    <!-- VIEW 4: WEEKLY 7-DAY ROTATION -->
+    <section id="view-weekly" class="app-view">
+      
+      <!-- Minimalist Header -->
+      <div class="view-header-clean">
+        <div class="view-title-row">
+          <h2>साप्ताहिक भोजन योजना (7-Day)</h2>
+          <button id="shareWeeklyBtn" class="btn-share-clean">📤 Share</button>
+        </div>
+        <p class="view-subtitle">Balanced rotation of dals, vegetables, and high-protein meals.</p>
+      </div>
+
+      <!-- Week Day Selector Tabs (Drastically cuts vertical clutter) -->
+      <div class="week-days-scroll">
+        <button class="day-tab active" data-day="0" onclick="selectWeeklyDay(0)">Mon</button>
+        <button class="day-tab" data-day="1" onclick="selectWeeklyDay(1)">Tue</button>
+        <button class="day-tab" data-day="2" onclick="selectWeeklyDay(2)">Wed</button>
+        <button class="day-tab" data-day="3" onclick="selectWeeklyDay(3)">Thu</button>
+        <button class="day-tab" data-day="4" onclick="selectWeeklyDay(4)">Fri</button>
+        <button class="day-tab" data-day="5" onclick="selectWeeklyDay(5)">Sat</button>
+        <button class="day-tab" data-day="6" onclick="selectWeeklyDay(6)">Sun</button>
+        <button class="day-tab" data-day="-1" onclick="selectWeeklyDay(-1)">View All</button>
+      </div>
+
+      <div id="weeklyPlanContainer" class="weekly-list-clean">
+        <!-- Rendered via app.js -->
+      </div>
+    </section>
+
+
+    <!-- VIEW 5: OPAL RASOI PRO & MONETIZATION HUB -->
+    <section id="view-pro" class="app-view">
+      
+      <!-- Pro Hero -->
+      <div class="pro-header-clean">
+        <span class="pro-badge">💎 OPAL RASOI PRO</span>
+        <h2>Stress-Free Kitchen Assistant</h2>
+        <p>Unlock domestic cook voice guides in Hindi, medical diet filters, and 1-click groceries.</p>
+      </div>
+
+      <!-- Quick Commerce Affiliate -->
+      <div class="pro-card-clean">
+        <div class="pro-card-title">
+          <span class="icon">🛒</span>
+          <div>
+            <h4>1-Click Grocery Order</h4>
+            <span class="sub">Blinkit • Zepto • Swiggy Instamart</span>
+          </div>
+        </div>
+        <p class="pro-card-desc">Need atta, rajma, or methi? Order all week's ingredients with 1 tap.</p>
+        <div class="qcom-btn-row">
+          <button class="btn-qcom blinkit" onclick="orderGrocery('Blinkit')">Blinkit ⚡</button>
+          <button class="btn-qcom zepto" onclick="orderGrocery('Zepto')">Zepto ⏱️</button>
+          <button class="btn-qcom swiggy" onclick="orderGrocery('Swiggy')">Instamart 🛵</button>
+        </div>
+      </div>
+
+      <!-- Subscription Options -->
+      <div class="pricing-cards-clean">
+        <div class="price-pill-card" id="planMonthly" onclick="selectPlan('monthly')">
+          <h5>Monthly</h5>
+          <div class="price">₹149<span>/mo</span></div>
+          <span class="sub">Cancel anytime</span>
+        </div>
+        <div class="price-pill-card active" id="planAnnual" onclick="selectPlan('annual')">
+          <span class="save-tag">SAVE 45%</span>
+          <h5>Annual</h5>
+          <div class="price">₹999<span>/yr</span></div>
+          <span class="sub">₹83/month</span>
+        </div>
+      </div>
+
+      <!-- Pro Features -->
+      <div class="pro-features-clean">
+        <div class="feature-item">
+          <span class="icon">🎧</span>
+          <div>
+            <strong>Cook Audio Guide in Hindi</strong>
+            <p>Voice steps so your household cook can listen hands-free.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="icon">🩺</span>
+          <div>
+            <strong>Medical & Ayurvedic Diets</strong>
+            <p>Diabetic-friendly, low-GI, gym high-protein, and Jain modes.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="icon">📄</span>
+          <div>
+            <strong>Printable Fridge Menu & WhatsApp Export</strong>
+            <p>Share weekly meal charts directly with your family.</p>
+          </div>
+        </div>
+      </div>
+
+      <button id="startTrialBtn" class="btn-pro-action">Start 7-Day Free Trial</button>
+    </section>
+
+
+    <!-- VIEW 6: ABOUT US & LEGAL DISCLAIMER -->
+    <section id="view-about" class="app-view">
+      <div class="view-header-clean">
+        <h2>About & Legal Notice</h2>
+        <p class="view-subtitle">Opal Luna Labs • Purely Advisory Disclaimer</p>
+      </div>
+
+      <!-- About Us Card -->
+      <div class="info-card-clean">
+        <div class="info-title-row">
+          <span class="info-icon">🏢</span>
+          <h3>Opal Luna Labs</h3>
+        </div>
+        <p><strong>Opal Luna Labs</strong> designs elegant software craft that solves everyday household friction points with minimalism, empathy, and speed.</p>
+        <p class="copyright-sub">© 2026 Opal Luna Labs. All rights reserved.</p>
+      </div>
+
+      <!-- Comprehensive Legal Notice -->
+      <div class="info-card-clean legal-border">
+        <div class="info-title-row">
+          <span class="info-icon">⚖️</span>
+          <h3>Culinary & Medical Disclaimer</h3>
+        </div>
+        <ul class="legal-list-clean">
+          <li><strong>Purely Advisory:</strong> All meal ideas, recipe guidelines, cooking times, nutritional notes, and advance preparation advice are culinary suggestions for domestic convenience.</li>
+          <li><strong>Zero Legal Liability:</strong> Neither this application nor Opal Luna Labs bears any legal, financial, or medical liability regarding allergic reactions, nutritional deficiencies, or health implications.</li>
+          <li><strong>User Discretion Mandated:</strong> Always inspect ingredient freshness, verify food allergies, and adjust salt, spices, and oil to personal dietary tolerance.</li>
+          <li><strong>Not Medical Advice:</strong> Individuals with chronic medical conditions should consult a certified physician or dietitian.</li>
+        </ul>
+      </div>
+
+      <!-- Clean Footer -->
+      <footer class="branding-footer-clean">
+        <p><strong>Powered & Developed by Opal Luna Labs</strong></p>
+        <p class="small">© 2026 Opal Luna Labs. All rights reserved.</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- Recipe Steps Modal -->
+  <div id="recipeModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="badge-slot" id="modalMealSlot">BREAKFAST</span>
+          <h3 id="modalDishTitle">Dish Name</h3>
+          <p id="modalDishHindi">Hindi Title</p>
+        </div>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img id="modalDishImage" class="modal-dish-img" src="" alt="Dish preview" style="display:none;" />
+        <div class="modal-info-bar">
+          <span id="modalCookTime">⏱️ 20 mins</span>
+          <span id="modalDifficulty">🟢 Easy</span>
+        </div>
+        <h4>💡 रसोई सलाह (Cook's Health Advice):</h4>
+        <p id="modalAdvice" class="modal-advice-box"></p>
+        <h4>सामग्री (Ingredients):</h4>
+        <ul id="modalIngredientsList" class="modal-ing-list"></ul>
+        <h4>सरल और आसान विधि (Step-by-Step Cooking):</h4>
+        <ol id="modalStepsList" class="modal-steps-list"></ol>
+      </div>
+      <div class="modal-footer">
+        <button id="shareRecipeModalBtn" class="btn-modal-secondary">📤 Share</button>
+        <button id="closeModalBtn2" class="btn-modal-primary">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar (Minimalist & Accessible) -->
+  <nav class="bottom-nav">
+    <button class="nav-tab active" data-tab="today" onclick="switchTab('today')">
+      <span class="nav-icon">🍲</span>
+      <span class="nav-label">मेनू</span>
+    </button>
+    <button class="nav-tab" data-tab="prep" onclick="switchTab('prep')">
+      <span class="nav-icon">🌙</span>
+      <span class="nav-label">कल की तैयारी</span>
+    </button>
+    <button class="nav-tab" data-tab="pantry" onclick="switchTab('pantry')">
+      <span class="nav-icon">🥬</span>
+      <span class="nav-label">घर में क्या है</span>
+    </button>
+    <button class="nav-tab" data-tab="weekly" onclick="switchTab('weekly')">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">साप्ताहिक</span>
+    </button>
+    <button class="nav-tab" data-tab="pro" onclick="switchTab('pro')">
+      <span class="nav-icon">💎</span>
+      <span class="nav-label">Pro</span>
+    </button>
+  </nav>
+
+  <!-- PWA Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

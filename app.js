@@ -11,10 +11,10 @@ const MEAL_DATABASE = {
       id: "bf_1",
       name: "Kanda Poha with Peanuts & Lemon",
       hindiTitle: "कांदा पोहा (मूंगफली और नींबू के साथ)",
-      recipeImage: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 15,
       difficulty: "Super Easy",
       tags: ["Under 20 Mins", "Iron Rich", "Low Calorie"],
+      nutrition: { calories: 270, protein: "7g", fiber: "4g" },
       healthAdvice: "Light on stomach, rich in iron and complex carbs. Roasted peanuts add healthy fats and sustained morning energy.",
       advancePrepNeeded: "Optional: Dry-roast peanuts tonight and store in an airtight jar.",
       ingredients: ["Flattened Rice (Poha)", "Onions", "Peanuts", "Green Chillies", "Curry Leaves", "Mustard Seeds", "Turmeric", "Lemon Juice", "Fresh Coriander"],
@@ -30,10 +30,10 @@ const MEAL_DATABASE = {
       id: "bf_2",
       name: "Moong Dal Chilla with Mint Chutney",
       hindiTitle: "मूंग दाल चीला (पुदीना चटनी के साथ)",
-      recipeImage: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 20,
       difficulty: "Easy",
       tags: ["High Protein", "Gluten Free", "Diabetic Friendly"],
+      nutrition: { calories: 210, protein: "14g", fiber: "6g" },
       healthAdvice: "Powerhouse of vegetarian protein (~14g per serving), low glycemic index, excellent for sustained morning alertness.",
       advancePrepNeeded: "MANDATORY: Soak 1 cup yellow moong dal for at least 2 hours or overnight tonight.",
       ingredients: ["Yellow Moong Dal (Soaked)", "Ginger", "Green Chillies", "Cumin Seeds (Jeera)", "Hing (Asafoetida)", "Grated Paneer/Veggies (optional)", "Mint/Coriander Chutney"],
@@ -49,10 +49,10 @@ const MEAL_DATABASE = {
       id: "bf_3",
       name: "Vegetable Daliya (Broken Wheat Khichdi)",
       hindiTitle: "पौष्टिक वेज दलिया",
-      recipeImage: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 25,
       difficulty: "Super Easy",
       tags: ["High Fiber", "One-Pot Meal", "Gut Friendly"],
+      nutrition: { calories: 230, protein: "8g", fiber: "7g" },
       healthAdvice: "Extremely high in dietary fiber, improves gut motility and keeps cholesterol in check.",
       advancePrepNeeded: "Optional: Pre-chop carrots, beans, and peas the night before.",
       ingredients: ["Roasted Daliya (Broken Wheat)", "Carrots", "Green Peas", "Tomatoes", "Ginger", "Cumin", "Turmeric", "Desi Ghee (1 tsp)"],
@@ -68,10 +68,10 @@ const MEAL_DATABASE = {
       id: "bf_4",
       name: "Besan & Veggie Toast",
       hindiTitle: "बेसन वेजी टोस्ट",
-      recipeImage: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 15,
       difficulty: "Super Easy",
       tags: ["Quick 15 Mins", "Kid Favorite", "Pantry Friendly"],
+      nutrition: { calories: 240, protein: "9g", fiber: "5g" },
       healthAdvice: "Gram flour is packed with soluble fiber and vegetable protein; satisfying and blood-sugar friendly.",
       advancePrepNeeded: "None! Instant mix ready in 2 minutes.",
       ingredients: ["Whole Wheat Bread", "Besan (Gram Flour)", "Finely chopped Onions", "Tomatoes", "Capsicum", "Ajwain (Carom seeds)", "Kasuri Methi"],
@@ -86,10 +86,10 @@ const MEAL_DATABASE = {
       id: "bf_5",
       name: "Methi Thepla with Fresh Curd",
       hindiTitle: "मेथी थेपला और ताज़ा दही",
-      recipeImage: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 20,
       difficulty: "Moderate",
       tags: ["Ayurvedic", "Travel Friendly", "High Fiber"],
+      nutrition: { calories: 290, protein: "9g", fiber: "6g" },
       healthAdvice: "Fenugreek (methi) is celebrated in Ayurveda for blood sugar regulation and joint health.",
       advancePrepNeeded: "Pluck, wash, and thoroughly dry fresh methi leaves tonight.",
       ingredients: ["Whole Wheat Flour (Atta)", "Besan (2 tbsp)", "Fresh Fenugreek Leaves (Methi)", "Turmeric", "Ajwain", "Sesame Seeds (Til)", "Yogurt/Dahi for serving"],
@@ -107,10 +107,10 @@ const MEAL_DATABASE = {
       id: "ln_1",
       name: "Yellow Toor Dal Tadka + Bhindi Masala + Phulkas",
       hindiTitle: "दाल तड़का + भिंडी मसाला + गरमा-गरम फुल्के",
-      recipeImage: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 30,
       difficulty: "Easy",
       tags: ["Balanced Meal", "High Comfort", "Everyday Staple"],
+      nutrition: { calories: 420, protein: "16g", fiber: "9g" },
       healthAdvice: "Classic balanced Indian plate: lentils provide amino acids, okra delivers soluble mucilage fiber for healthy digestion.",
       advancePrepNeeded: "Wash and completely dry bhindi (ladies' finger) tonight so it doesn't get sticky while slicing.",
       ingredients: ["Toor Dal (Arhar)", "Bhindi (Okra)", "Onions", "Tomatoes", "Garlic", "Cumin", "Hing", "Whole Wheat Flour for Phulkas", "Desi Ghee Tadka"],
@@ -126,10 +126,10 @@ const MEAL_DATABASE = {
       id: "ln_2",
       name: "Punjabi Rajma Masala + Jeera Rice + Kachumber Salad",
       hindiTitle: "पंजाबी राजमा मसाला + जीरा राइस + कचुम्बर",
-      recipeImage: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 40,
       difficulty: "Moderate",
       tags: ["Complete Protein", "Family Favorite", "Weekend Special"],
+      nutrition: { calories: 480, protein: "18g", fiber: "12g" },
       healthAdvice: "Red kidney beans paired with rice form a complete protein profile containing all 9 essential amino acids.",
       advancePrepNeeded: "CRITICAL: Must soak 1.5 cups red rajma in warm water for at least 8 hours tonight!",
       ingredients: ["Red Kidney Beans (Rajma)", "Onions", "Ginger-Garlic Paste", "Tomato Puree", "Coriander Powder", "Garam Masala", "Kasuri Methi", "Basmati Rice", "Cumin"],
@@ -145,10 +145,10 @@ const MEAL_DATABASE = {
       id: "ln_3",
       name: "Palak Paneer + Lauki Chana Dal + Multigrain Chapati",
       hindiTitle: "पालक पनीर + लौकी चना दाल + रोटी",
-      recipeImage: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 35,
       difficulty: "Moderate",
       tags: ["High Calcium", "Iron Boost", "Restaurant Taste"],
+      nutrition: { calories: 460, protein: "21g", fiber: "11g" },
       healthAdvice: "Rich in non-heme iron, calcium, and bone-strengthening protein. Low calorie with high micronutrient density.",
       advancePrepNeeded: "Wash spinach leaves thoroughly; soak chana dal for 30 minutes.",
       ingredients: ["Fresh Spinach (Palak)", "Fresh Paneer Cubes", "Chana Dal", "Bottle Gourd (Lauki)", "Ginger", "Green Chillies", "Garam Masala", "Kasuri Methi"],
@@ -164,10 +164,10 @@ const MEAL_DATABASE = {
       id: "ln_4",
       name: "Amritsari Chole + Steamed Rice + Boondi Raita",
       hindiTitle: "अमृतसरी छोले + उबले चावल + बूंदी रायता",
-      recipeImage: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 40,
       difficulty: "Moderate",
       tags: ["High Fiber", "Satiating", "Authentic Desi"],
+      nutrition: { calories: 510, protein: "17g", fiber: "13g" },
       healthAdvice: "Chickpeas are packed with soluble fiber that slows carbohydrate absorption and prevents midday blood sugar spikes.",
       advancePrepNeeded: "CRITICAL: Soak Kabuli Chana (chickpeas) overnight tonight with a pinch of salt.",
       ingredients: ["Kabuli Chana (Chickpeas)", "Tea Bag (for dark color)", "Onions", "Tomatoes", "Anardana", "Amchur", "Ginger juliennes", "Basmati Rice"],
@@ -183,10 +183,10 @@ const MEAL_DATABASE = {
       id: "ln_5",
       name: "Gujarati Kadhi + Moong Dal Khichdi + Ringan Bharta",
       hindiTitle: "गुजराती कढ़ी + मूंग दाल खिचड़ी + बैंगन भर्ता",
-      recipeImage: "https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 30,
       difficulty: "Easy",
       tags: ["Gut Healing", "Probiotic", "Light & Soothing"],
+      nutrition: { calories: 380, protein: "14g", fiber: "8g" },
       healthAdvice: "Cultured buttermilk base soothes the digestive tract, khichdi is easily absorbed by the intestines without causing sluggishness.",
       advancePrepNeeded: "Keep fresh sour curd or buttermilk ready in the fridge.",
       ingredients: ["Sour Curd / Buttermilk", "Besan (Gram flour)", "Cumin", "Mustard Seeds", "Curry leaves", "Cinnamon", "Cloves", "Rice", "Yellow Moong Dal"],
@@ -205,10 +205,10 @@ const MEAL_DATABASE = {
       id: "dn_1",
       name: "Panchmel Dal Khichdi + Tadka Dahi + Roasted Papad",
       hindiTitle: "पंचमेल दाल खिचड़ी + तड़का दही + भुना पापड़",
-      recipeImage: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 20,
       difficulty: "Super Easy",
       tags: ["Ayurvedic Dinner", "Sleep Friendly", "Under 20 Mins"],
+      nutrition: { calories: 340, protein: "15g", fiber: "8g" },
       healthAdvice: "Combining five lentils yields an exceptional micronutrient profile while remaining very light on the stomach before bedtime.",
       advancePrepNeeded: "None! Pure comfort ready in 20 minutes.",
       ingredients: ["Mixed Lentils (Panchratna Dal)", "Short-grain Rice", "Cumin Seeds", "Hing", "Turmeric", "Desi Ghee (1 tbsp)", "Curd (Dahi)"],
@@ -224,10 +224,10 @@ const MEAL_DATABASE = {
       id: "dn_2",
       name: "Lauki Tamatar Curry + Warm Phulkas + Mint Chaas",
       hindiTitle: "लौकी टमाटर करी + नर्म फुल्के + पुदीना छाछ",
-      recipeImage: "https://images.unsplash.com/photo-1547496502-affa22d38842?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 25,
       difficulty: "Super Easy",
       tags: ["Hydrating", "Low Calorie", "Detox Friendly"],
+      nutrition: { calories: 280, protein: "9g", fiber: "7g" },
       healthAdvice: "Bottle gourd (lauki) contains over 92% water, is zero fat, cooling for the liver, and prevents nocturnal water retention.",
       advancePrepNeeded: "Check if fresh bottle gourd is available in the crisper drawer.",
       ingredients: ["Fresh Tender Lauki (Bottle Gourd)", "Tomatoes", "Ginger", "Cumin Seeds", "Turmeric", "Coriander Powder", "Fresh Coriander"],
@@ -243,10 +243,10 @@ const MEAL_DATABASE = {
       id: "dn_3",
       name: "Light Paneer Bhurji + Multigrain Phulkas + Green Salad",
       hindiTitle: "पनीर भुर्जी + मल्टीग्रेन फुल्के + सलाद",
-      recipeImage: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 20,
       difficulty: "Easy",
       tags: ["High Protein", "Quick 20 Mins", "Low Carb"],
+      nutrition: { calories: 390, protein: "22g", fiber: "7g" },
       healthAdvice: "Slow-digesting casein protein in paneer repairs muscle tissues overnight while you sleep without carb heaviness.",
       advancePrepNeeded: "Ensure fresh dairy paneer is in the fridge.",
       ingredients: ["Crumbled Fresh Paneer", "Onions", "Tomatoes", "Capsicum", "Green Chillies", "Turmeric", "Kasuri Methi", "Garam Masala"],
@@ -262,10 +262,10 @@ const MEAL_DATABASE = {
       id: "dn_4",
       name: "Vegetable Oats Dalia Upma + Lemon Coriander Soup",
       hindiTitle: "वेज ओट्स दलिया + लेमन कोरिएंडर सूप",
-      recipeImage: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 20,
       difficulty: "Super Easy",
       tags: ["Heart Healthy", "Light Dinner", "Immunity Boost"],
+      nutrition: { calories: 260, protein: "10g", fiber: "9g" },
       healthAdvice: "Beta-glucan fiber in oats lowers LDL cholesterol, while vitamin C in lemon coriander soup bolsters immunity.",
       advancePrepNeeded: "Chop mixed veggies (carrots, beans, capsicum).",
       ingredients: ["Rolled Oats / Broken Wheat", "Mixed chopped Vegetables", "Mustard Seeds", "Curry Leaves", "Ginger", "Lemon Juice", "Fresh Coriander"],
@@ -281,10 +281,10 @@ const MEAL_DATABASE = {
       id: "dn_5",
       name: "Masoor Dal Tadka + Jeera Aloo + Roti",
       hindiTitle: "मसूर दाल तड़का + जीरा आलू + रोटी",
-      recipeImage: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&auto=format&fit=crop&q=80",
       cookTimeMinutes: 25,
       difficulty: "Easy",
       tags: ["Fast Cooking", "Staple Ingredients", "Satisfying"],
+      nutrition: { calories: 410, protein: "15g", fiber: "8g" },
       healthAdvice: "Orange Masoor dal cooks in minutes without prior soaking and provides essential iron, potassium, and magnesium.",
       advancePrepNeeded: "Boil 2 potatoes if you prefer quick-toss jeera aloo.",
       ingredients: ["Red Lentils (Dhuli Masoor Dal)", "Potatoes", "Cumin Seeds", "Dry Red Chillies", "Garlic", "Turmeric", "Coriander"],
@@ -440,7 +440,18 @@ function getPlaceholderImage(dishName, slotKey = "lunch") {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
-// --- 8. HELPER: DIFFICULTY BADGE GENERATOR ---
+// --- 8. HELPER: DIFFICULTY & NUTRITION GENERATORS ---
+function getMealNutrition(meal) {
+  if (meal && meal.nutrition) return meal.nutrition;
+  if (meal && meal.tags && meal.tags.includes("High Protein")) {
+    return { calories: 380, protein: "18g", fiber: "8g" };
+  }
+  if (meal && meal.tags && meal.tags.includes("Low Calorie")) {
+    return { calories: 240, protein: "7g", fiber: "5g" };
+  }
+  return { calories: 320, protein: "11g", fiber: "6g" };
+}
+
 function getDifficultyBadge(difficulty) {
   const d = (difficulty || "Easy").toLowerCase();
   let cls = "diff-easy";
@@ -475,11 +486,11 @@ function renderMealCard(slotKey, meal, containerId) {
 
   const slot = slotLabels[slotKey];
   const primaryTag = (meal.tags && meal.tags.length > 0) ? meal.tags[0] : "Pure Veg";
+  const nutri = meal.nutrition || getMealNutrition(meal);
   const prepAlertHtml = meal.advancePrepNeeded && !meal.advancePrepNeeded.startsWith("None")
     ? `<div class="prep-compact-pill">🌙 <strong>रात की तैयारी:</strong> ${meal.advancePrepNeeded}</div>`
     : "";
 
-  const imgSrc = meal.recipeImage || getPlaceholderImage(meal.name, slotKey);
   const cardDetailsId = `details_${slotKey}`;
 
   container.innerHTML = `
@@ -507,6 +518,7 @@ function renderMealCard(slotKey, meal, containerId) {
     <div class="dish-meta-row-clean">
       <span class="meta-tag">⏱️ ${meal.cookTimeMinutes} mins</span>
       <span class="meta-tag accent">🌿 ${primaryTag}</span>
+      <span class="meta-tag" title="Approximate Nutrition per Serving">🔥 ~${nutri.calories} kcal • 💪 ${nutri.protein}</span>
     </div>
 
     ${prepAlertHtml}
@@ -729,30 +741,29 @@ function renderPantry() {
       </div>
     `;
   } else {
-    resultsContainer.innerHTML = matched.map(meal => `
-      <div class="pantry-result-card">
-        <div class="pantry-result-img-wrap">
-          <img 
-            class="pantry-result-img" 
-            src="${meal.recipeImage || getPlaceholderImage(meal.name, 'lunch')}" 
-            alt="${meal.name}" 
-            loading="lazy"
-            onerror="this.onerror=null; this.src=getPlaceholderImage('${meal.name.replace(/'/g, "\\'")}', 'lunch')" 
-          />
-          <div class="pantry-badge-overlay">
-            ${getDifficultyBadge(meal.difficulty)}
-          </div>
-        </div>
-        <div class="pantry-result-info">
-          <h4 class="pantry-dish-title">${meal.name}</h4>
-          <p class="pantry-dish-hindi">${meal.hindiTitle}</p>
-          <div class="pantry-meta-row">
-            <span>⏱️ ${meal.cookTimeMinutes} mins</span>
+    resultsContainer.innerHTML = matched.map(meal => {
+      const nutri = meal.nutrition || getMealNutrition(meal);
+      const safeDishName = meal.name.replace(/'/g, "\\'");
+      return `
+        <div class="pantry-result-card" onclick="openRecipeModal('${safeDishName}')" title="Tap to view recipe steps and nutritional details">
+          <div class="pantry-card-header">
+            <div class="pantry-card-title-group">
+              <h4 class="pantry-dish-title">${meal.name}</h4>
+              <p class="pantry-dish-hindi">${meal.hindiTitle}</p>
+            </div>
+            <div class="pantry-card-badges">
+              ${getDifficultyBadge(meal.difficulty)}
+              <span class="pantry-time-pill">⏱️ ${meal.cookTimeMinutes}m</span>
+            </div>
           </div>
           <p class="pantry-advice">${meal.healthAdvice}</p>
+          <div class="pantry-card-footer">
+            <span class="pantry-nutri-preview">🔥 ~${nutri.calories} kcal • 💪 ${nutri.protein} Protein • 🌾 ${nutri.fiber} Fiber</span>
+            <span class="pantry-view-btn">विधि देखें ➔</span>
+          </div>
         </div>
-      </div>
-    `).join("");
+      `;
+    }).join("");
   }
 }
 
@@ -836,14 +847,35 @@ function toggleDayDetails(idx) {
 }
 
 // --- 11. RECIPE STEPS MODAL ---
-function openRecipeModal(slotKey) {
-  let meal;
-  if (slotKey === "breakfast") meal = MEAL_DATABASE.breakfast[state.currentBfIndex % MEAL_DATABASE.breakfast.length];
-  if (slotKey === "lunch") meal = MEAL_DATABASE.lunch[state.currentLnIndex % MEAL_DATABASE.lunch.length];
-  if (slotKey === "dinner") meal = MEAL_DATABASE.dinner[state.currentDnIndex % MEAL_DATABASE.dinner.length];
+function openRecipeModal(target, slotHint) {
+  let meal = null;
+  let slotLabel = "RECIPE";
+
+  if (target === "breakfast" || target === "lunch" || target === "dinner") {
+    if (target === "breakfast") meal = MEAL_DATABASE.breakfast[state.currentBfIndex % MEAL_DATABASE.breakfast.length];
+    if (target === "lunch") meal = MEAL_DATABASE.lunch[state.currentLnIndex % MEAL_DATABASE.lunch.length];
+    if (target === "dinner") meal = MEAL_DATABASE.dinner[state.currentDnIndex % MEAL_DATABASE.dinner.length];
+    slotLabel = target.toUpperCase();
+  } else if (typeof target === "string") {
+    const all = [...MEAL_DATABASE.breakfast, ...MEAL_DATABASE.lunch, ...MEAL_DATABASE.dinner];
+    meal = all.find(m => m.name === target || m.id === target);
+    if (meal) {
+      if (MEAL_DATABASE.breakfast.some(m => m.id === meal.id)) slotLabel = "BREAKFAST";
+      else if (MEAL_DATABASE.lunch.some(m => m.id === meal.id)) slotLabel = "LUNCH";
+      else if (MEAL_DATABASE.dinner.some(m => m.id === meal.id)) slotLabel = "DINNER";
+      else slotLabel = slotHint ? slotHint.toUpperCase() : "RECIPE";
+    }
+  } else if (typeof target === "object" && target !== null) {
+    meal = target;
+    slotLabel = slotHint ? slotHint.toUpperCase() : "RECIPE";
+  }
+
   if (!meal) return;
 
-  document.getElementById("modalMealSlot").textContent = slotKey.toUpperCase();
+  state.currentModalMeal = meal;
+  state.currentModalSlot = slotLabel;
+
+  document.getElementById("modalMealSlot").textContent = slotLabel;
   document.getElementById("modalDishTitle").textContent = meal.name;
   document.getElementById("modalDishHindi").textContent = meal.hindiTitle;
   document.getElementById("modalCookTime").textContent = `⏱️ ${meal.cookTimeMinutes} mins`;
@@ -851,8 +883,17 @@ function openRecipeModal(slotKey) {
   if (modalDiff) {
     modalDiff.innerHTML = getDifficultyBadge(meal.difficulty);
   }
-  document.getElementById("modalAdvice").textContent = meal.healthAdvice;
 
+  // Populate Nutritional Highlights
+  const nutri = meal.nutrition || getMealNutrition(meal);
+  const calEl = document.getElementById("modalNutriCalories");
+  const proEl = document.getElementById("modalNutriProtein");
+  const fibEl = document.getElementById("modalNutriFiber");
+  if (calEl) calEl.textContent = `${nutri.calories} kcal`;
+  if (proEl) proEl.textContent = nutri.protein;
+  if (fibEl) fibEl.textContent = nutri.fiber;
+
+  document.getElementById("modalAdvice").textContent = meal.healthAdvice;
   document.getElementById("modalIngredientsList").innerHTML = meal.ingredients.map(i => `<li>${i}</li>`).join("");
   document.getElementById("modalStepsList").innerHTML = meal.steps.map(s => `<li>${s}</li>`).join("");
 
@@ -866,12 +907,18 @@ function closeModal() {
 // --- 12. SHARING & MONETIZATION ACTIONS ---
 function shareMeal(slotKey) {
   let meal;
+  let slotLabel = slotKey ? slotKey.toUpperCase() : "RECIPE";
   if (slotKey === "breakfast") meal = MEAL_DATABASE.breakfast[state.currentBfIndex % MEAL_DATABASE.breakfast.length];
-  if (slotKey === "lunch") meal = MEAL_DATABASE.lunch[state.currentLnIndex % MEAL_DATABASE.lunch.length];
-  if (slotKey === "dinner") meal = MEAL_DATABASE.dinner[state.currentDnIndex % MEAL_DATABASE.dinner.length];
+  else if (slotKey === "lunch") meal = MEAL_DATABASE.lunch[state.currentLnIndex % MEAL_DATABASE.lunch.length];
+  else if (slotKey === "dinner") meal = MEAL_DATABASE.dinner[state.currentDnIndex % MEAL_DATABASE.dinner.length];
+  else if (state.currentModalMeal) {
+    meal = state.currentModalMeal;
+    slotLabel = state.currentModalSlot || "RECIPE";
+  }
   if (!meal) return;
 
-  const text = `🍛 *Kya Banaye? (${slotKey.toUpperCase()})*\n*${meal.name}* (${meal.hindiTitle})\n⏱️ समय: ${meal.cookTimeMinutes} मिनट\n💡 स्वास्थ्य सलाह: ${meal.healthAdvice}\n📝 सामग्री: ${meal.ingredients.join(", ")}\n\n– *Kya Banaye • Opal Luna Labs*`;
+  const nutri = meal.nutrition || getMealNutrition(meal);
+  const text = `🍛 *Kya Banaye? (${slotLabel})*\n*${meal.name}* (${meal.hindiTitle})\n⏱️ समय: ${meal.cookTimeMinutes} मिनट\n🔥 पोषण: ~${nutri.calories} kcal • प्रोटीन: ${nutri.protein} • फाइबर: ${nutri.fiber}\n💡 स्वास्थ्य सलाह: ${meal.healthAdvice}\n📝 सामग्री: ${meal.ingredients.join(", ")}\n\n– *Kya Banaye • Opal Luna Labs*`;
 
   if (navigator.share) {
     navigator.share({ title: meal.name, text: text }).catch(() => {});
@@ -1082,6 +1129,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Modal events
   document.getElementById("closeModalBtn")?.addEventListener("click", closeModal);
   document.getElementById("closeModalBtn2")?.addEventListener("click", closeModal);
+  document.getElementById("shareRecipeModalBtn")?.addEventListener("click", () => {
+    if (state.currentModalMeal) {
+      shareMeal();
+    }
+  });
   document.getElementById("recipeModal")?.addEventListener("click", (e) => {
     if (e.target.id === "recipeModal") closeModal();
   });

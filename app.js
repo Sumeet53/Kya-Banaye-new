@@ -483,28 +483,17 @@ function renderMealCard(slotKey, meal, containerId) {
   const cardDetailsId = `details_${slotKey}`;
 
   container.innerHTML = `
-    <!-- Slot Header & Quick Swap -->
+    <!-- Slot Header, Difficulty Badge & Quick Swap -->
     <div class="meal-card-top">
       <div class="slot-pill ${slot.cls}">
         <span class="slot-icon">${slot.icon}</span>
         <strong>${slot.name}</strong> • <span>${slot.hindi}</span>
       </div>
-      <button class="btn-swap-clean" onclick="swapMeal('${slotKey}')" title="Swap with another dish">
-        🔄 बदलें (Swap)
-      </button>
-    </div>
-
-    <!-- Dish Hero Image with Overlay Difficulty Badge -->
-    <div class="meal-image-wrap">
-      <img 
-        class="meal-card-img" 
-        src="${imgSrc}" 
-        alt="${meal.name}" 
-        loading="lazy"
-        onerror="this.onerror=null; this.src=getPlaceholderImage('${meal.name.replace(/'/g, "\\'")}', '${slotKey}')" 
-      />
-      <div class="meal-image-badge-wrap">
+      <div class="card-top-right">
         ${getDifficultyBadge(meal.difficulty)}
+        <button class="btn-swap-clean" onclick="swapMeal('${slotKey}')" title="Swap with another dish">
+          🔄 बदलें (Swap)
+        </button>
       </div>
     </div>
     
@@ -864,16 +853,6 @@ function openRecipeModal(slotKey) {
   }
   document.getElementById("modalAdvice").textContent = meal.healthAdvice;
 
-  const modalImg = document.getElementById("modalDishImage");
-  if (modalImg) {
-    modalImg.src = meal.recipeImage || getPlaceholderImage(meal.name, slotKey);
-    modalImg.onerror = function() {
-      this.onerror = null;
-      this.src = getPlaceholderImage(meal.name, slotKey);
-    };
-    modalImg.style.display = "block";
-  }
-
   document.getElementById("modalIngredientsList").innerHTML = meal.ingredients.map(i => `<li>${i}</li>`).join("");
   document.getElementById("modalStepsList").innerHTML = meal.steps.map(s => `<li>${s}</li>`).join("");
 
@@ -892,7 +871,7 @@ function shareMeal(slotKey) {
   if (slotKey === "dinner") meal = MEAL_DATABASE.dinner[state.currentDnIndex % MEAL_DATABASE.dinner.length];
   if (!meal) return;
 
-  const text = `🍛 *आज के मेनू की सलाह (${slotKey.toUpperCase()})*\n*${meal.name}* (${meal.hindiTitle})\n⏱️ समय: ${meal.cookTimeMinutes} मिनट\n💡 स्वास्थ्य सलाह: ${meal.healthAdvice}\n📝 सामग्री: ${meal.ingredients.join(", ")}\n\n– *Powered & Developed by Opal Luna Labs*`;
+  const text = `🍛 *Kya Banaye? (${slotKey.toUpperCase()})*\n*${meal.name}* (${meal.hindiTitle})\n⏱️ समय: ${meal.cookTimeMinutes} मिनट\n💡 स्वास्थ्य सलाह: ${meal.healthAdvice}\n📝 सामग्री: ${meal.ingredients.join(", ")}\n\n– *Kya Banaye • Opal Luna Labs*`;
 
   if (navigator.share) {
     navigator.share({ title: meal.name, text: text }).catch(() => {});

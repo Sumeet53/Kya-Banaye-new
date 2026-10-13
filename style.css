@@ -5,70 +5,70 @@
    ======================================================== */
 
 :root {
-  /* Canvas & Neutral System */
-  --bg-app: #F8FAFC;
+  /* Google Material Design 3 (M3) Color System */
+  --bg-app: #F8F9FA;
   --surface: #FFFFFF;
-  --surface-alt: #F1F5F9;
-  --surface-hover: #F8FAFC;
-  --border: #E2E8F0;
-  --border-light: #F1F5F9;
+  --surface-alt: #F1F3F4;
+  --surface-hover: #F8F9FA;
+  --border: #E0E3E7;
+  --border-light: #F1F3F4;
 
-  --text-main: #0F172A;
-  --text-body: #334155;
-  --text-muted: #64748B;
-  --text-light: #94A3B8;
+  --text-main: #1F1F1F;
+  --text-body: #444746;
+  --text-muted: #747775;
+  --text-light: #9AA0A6;
 
-  /* Primary Light Blue Palette */
-  --blue-primary: #0284C7;
-  --blue-dark: #0369A1;
-  --blue-light: #F0F9FF;
-  --blue-tint: #E0F2FE;
-  --blue-border: #BAE6FD;
+  /* Google Blue System (Primary M3) */
+  --blue-primary: #0B57D0;
+  --blue-dark: #0842A0;
+  --blue-light: #E8F0FE;
+  --blue-tint: #D3E3FD;
+  --blue-border: #C2E7FF;
 
-  /* Primary Light Green Palette */
-  --green-primary: #059669;
-  --green-dark: #065F46;
-  --green-light: #ECFDF5;
-  --green-tint: #D1FAE5;
-  --green-border: #A7F3D0;
+  /* Google Green System (Success & Vitality) */
+  --green-primary: #188038;
+  --green-dark: #137333;
+  --green-light: #E6F4EA;
+  --green-tint: #CEEAD6;
+  --green-border: #A8DAB5;
 
   /* Slot Category Colors */
-  --breakfast-color: #0284C7;
-  --breakfast-bg: #F0F9FF;
-  --breakfast-border: #BAE6FD;
+  --breakfast-color: #185ABC;
+  --breakfast-bg: #E8F0FE;
+  --breakfast-border: #C2E7FF;
 
-  --lunch-color: #059669;
-  --lunch-bg: #ECFDF5;
-  --lunch-border: #A7F3D0;
+  --lunch-color: #137333;
+  --lunch-bg: #E6F4EA;
+  --lunch-border: #CEEAD6;
 
-  --dinner-color: #0D9488;
-  --dinner-bg: #F0FDFA;
-  --dinner-border: #99F6E4;
+  --dinner-color: #00796B;
+  --dinner-bg: #E0F2F1;
+  --dinner-border: #B2DFDB;
 
   /* Difficulty Accents */
-  --diff-easy-bg: #ECFDF5;
-  --diff-easy-text: #047857;
-  --diff-easy-dot: #10B981;
+  --diff-easy-bg: #E6F4EA;
+  --diff-easy-text: #137333;
+  --diff-easy-dot: #188038;
 
-  --diff-med-bg: #F0F9FF;
-  --diff-med-text: #0369A1;
-  --diff-med-dot: #0284C7;
+  --diff-med-bg: #E8F0FE;
+  --diff-med-text: #185ABC;
+  --diff-med-dot: #0B57D0;
 
-  --diff-hard-bg: #FFF1F2;
-  --diff-hard-text: #BE123C;
-  --diff-hard-dot: #F43F5E;
+  --diff-hard-bg: #FCE8E6;
+  --diff-hard-text: #C5221F;
+  --diff-hard-dot: #D93025;
 
-  /* Typography & Layout */
-  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --radius-lg: 16px;
-  --radius-md: 12px;
+  /* Google Typography & Shape System */
+  --font-family: 'Google Sans', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --radius-lg: 20px;
+  --radius-md: 14px;
   --radius-sm: 8px;
   --radius-pill: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
-  --shadow-card: 0 2px 8px -2px rgba(15, 23, 42, 0.05);
-  --shadow-modal: 0 20px 25px -5px rgba(15, 23, 42, 0.15), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+  /* Google Ambient Elevation Shadows */
+  --shadow-sm: 0 1px 2px rgba(60, 64, 67, 0.08), 0 1px 3px 1px rgba(60, 64, 67, 0.04);
+  --shadow-card: 0 1px 2px rgba(60, 64, 67, 0.1), 0 1px 3px 1px rgba(60, 64, 67, 0.05);
+  --shadow-modal: 0 4px 8px 3px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3);
 }
 
 /* Base Reset */
@@ -275,36 +275,41 @@ body {
 }
 
 /* Segmented Meal Filter (Zero clutter, single meal focus) */
+/* Segmented Meal Filter (Google M3 Pill Filter) */
 .segmented-meal-filter {
   display: flex;
   background: var(--surface-alt);
-  padding: 3px;
-  border-radius: var(--radius-pill);
+  padding: 4px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  gap: 2px;
-  margin-bottom: 14px;
+  gap: 4px;
+  margin-bottom: 16px;
 }
 
 .filter-chip {
   flex: 1;
   background: transparent;
   border: none;
-  color: var(--text-muted);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 8px 6px;
-  border-radius: var(--radius-pill);
+  color: var(--text-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   text-align: center;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
+.filter-chip:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
 .filter-chip.active {
   background: var(--surface);
   color: var(--blue-primary);
   font-weight: 700;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.12);
 }
 
 /* Meal Cards (Clean, Light, Readable) */
@@ -566,23 +571,25 @@ body {
   background: var(--blue-primary);
   color: #FFFFFF;
   border: none;
-  padding: 10px;
-  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: all 0.2s ease;
   text-align: center;
+  box-shadow: 0 1px 2px rgba(11, 87, 208, 0.2);
 }
 
 .btn-primary-recipe:hover {
   background: var(--blue-dark);
+  box-shadow: 0 2px 4px rgba(11, 87, 208, 0.3);
 }
 
 .btn-share-icon {
   background: var(--surface-alt);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   width: 42px;
   height: 42px;
   display: flex;
@@ -594,8 +601,8 @@ body {
 }
 
 .btn-share-icon:hover {
-  background: var(--green-light);
-  border-color: var(--green-border);
+  background: var(--blue-light);
+  border-color: var(--blue-border);
 }
 
 
@@ -1697,35 +1704,66 @@ input:checked + .slider:before {
 
 
 /* BOTTOM NAVIGATION (MINIMALIST & ACCESSIBLE) */
+/* Top Pro Button */
+.pro-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  border: 1px solid var(--blue-border);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 6px;
+}
+
+.pro-pill-btn:hover {
+  background: var(--blue-tint);
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
+  background: #FFFFFF;
   border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-around;
-  padding: 6px 0;
+  padding: 8px 12px 10px;
   max-width: 600px;
   margin: 0 auto;
   z-index: 100;
+  box-shadow: 0 -1px 3px rgba(60, 64, 67, 0.05);
 }
 
 .nav-tab {
+  flex: 1;
   background: transparent;
   border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  min-width: 54px;
-  padding: 4px 6px;
-  border-radius: var(--radius-md);
+  gap: 3px;
+  padding: 2px 4px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
+}
+
+.nav-indicator {
+  width: 56px;
+  height: 32px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .nav-icon {
@@ -1734,30 +1772,35 @@ input:checked + .slider:before {
 }
 
 .nav-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-body);
   white-space: nowrap;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.nav-tab.active .nav-indicator {
+  background-color: var(--blue-tint);
 }
 
 .nav-tab.active .nav-icon {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .nav-tab.active .nav-label {
-  color: var(--blue-primary);
-  font-weight: 800;
+  color: #041E49;
+  font-weight: 700;
 }
 
 /* --- COOKED THIS CONFIRMATION & KITCHEN DIARY STYLES --- */
 .btn-cooked-action {
-  background: var(--surface-alt);
+  background: #FFFFFF;
   color: var(--text-body);
-  border: 1.5px solid var(--border);
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
+  border: 1px solid #747775;
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -1768,20 +1811,19 @@ input:checked + .slider:before {
 }
 
 .btn-cooked-action:hover {
-  background: #DCFCE7;
-  color: #166534;
-  border-color: #86EFAC;
+  background: #F1F3F4;
+  color: var(--text-main);
 }
 
 .btn-cooked-action.is-cooked {
-  background: #16A34A;
+  background: #188038;
   color: #FFFFFF;
-  border-color: #15803D;
-  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+  border-color: #137333;
+  box-shadow: 0 1px 3px rgba(24, 128, 56, 0.3);
 }
 
 .btn-cooked-action.is-cooked:hover {
-  background: #15803D;
+  background: #137333;
 }
 
 /* Cooked Today Banner inside card */

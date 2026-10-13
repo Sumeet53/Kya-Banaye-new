@@ -39,6 +39,9 @@
       </div>
     </div>
     <div class="header-actions">
+      <button id="proTopBtn" class="pro-pill-btn" onclick="switchTab('pro')" title="Opal Rasoi Pro Features">
+        <span class="pro-icon">💎</span> <span class="pro-text">Pro</span>
+      </button>
       <button id="aboutTopBtn" class="icon-btn" aria-label="About and Legal" title="About & Legal Disclaimer">
         ℹ️
       </button>
@@ -148,42 +151,9 @@
     </section>
 
 
-    <!-- VIEW 3: PANTRY SOLVER (GHAR MEIN KYA HAI) -->
-    <section id="view-pantry" class="app-view">
-      
-      <!-- Minimalist Pantry Header -->
-      <div class="view-header-clean">
-        <div class="view-title-row">
-          <h2>घर में क्या है? (Pantry Solver)</h2>
-          <button id="clearPantryBtn" class="btn-clear-selection">Clear All</button>
-        </div>
-        <p class="view-subtitle">Select what you have in the fridge or kitchen basket.</p>
-      </div>
-
-      <!-- Category Filter Tabs for Ingredients -->
-      <div class="pantry-category-tabs">
-        <button class="pantry-cat-btn active" onclick="filterPantryCategory('all')">All</button>
-        <button class="pantry-cat-btn" onclick="filterPantryCategory('veggie')">🥬 Veggies</button>
-        <button class="pantry-cat-btn" onclick="filterPantryCategory('grain')">🌾 Dals & Grains</button>
-        <button class="pantry-cat-btn" onclick="filterPantryCategory('dairy')">🥛 Dairy & Staples</button>
-      </div>
-
-      <!-- Ingredient Chips Container -->
-      <div id="pantryChipsContainer" class="pantry-chips-clean">
-        <!-- Rendered via app.js -->
-      </div>
-
-      <!-- Suggested Dishes Results -->
-      <div class="checklist-header">
-        <h3 id="matchedDishesHeading">Matching Meals (सुझाए गए व्यंजन)</h3>
-      </div>
-      <div id="pantryResultsContainer" class="pantry-results-clean">
-        <!-- Rendered via app.js -->
-      </div>
     </section>
 
-
-    <!-- VIEW 4: WEEKLY 7-DAY ROTATION -->
+    <!-- VIEW 3: WEEKLY 7-DAY ROTATION -->
     <section id="view-weekly" class="app-view">
       
       <!-- Minimalist Header -->
@@ -413,31 +383,23 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation Bar (Minimalist & Accessible) -->
+  <!-- Bottom Navigation Bar (Google Material Design 3 Style) -->
   <nav class="bottom-nav">
     <button class="nav-tab active" data-tab="today" onclick="switchTab('today')">
-      <span class="nav-icon">🍲</span>
+      <div class="nav-indicator"><span class="nav-icon">🍲</span></div>
       <span class="nav-label">मेनू</span>
     </button>
     <button class="nav-tab" data-tab="prep" onclick="switchTab('prep')">
-      <span class="nav-icon">🌙</span>
+      <div class="nav-indicator"><span class="nav-icon">🌙</span></div>
       <span class="nav-label">कल की तैयारी</span>
     </button>
-    <button class="nav-tab" data-tab="pantry" onclick="switchTab('pantry')">
-      <span class="nav-icon">🥬</span>
-      <span class="nav-label">घर में क्या है</span>
-    </button>
     <button class="nav-tab" data-tab="weekly" onclick="switchTab('weekly')">
-      <span class="nav-icon">📅</span>
+      <div class="nav-indicator"><span class="nav-icon">📅</span></div>
       <span class="nav-label">साप्ताहिक</span>
     </button>
     <button class="nav-tab" data-tab="history" onclick="switchTab('history')">
-      <span class="nav-icon">📖</span>
-      <span class="nav-label">डायरी</span>
-    </button>
-    <button class="nav-tab" data-tab="pro" onclick="switchTab('pro')">
-      <span class="nav-icon">💎</span>
-      <span class="nav-label">Pro</span>
+      <div class="nav-indicator"><span class="nav-icon">📖</span></div>
+      <span class="nav-label">रसोई डायरी</span>
     </button>
   </nav>
 

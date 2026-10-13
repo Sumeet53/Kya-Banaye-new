@@ -593,42 +593,67 @@ const DEFAULT_PREP_ITEMS = [
   {
     id: "prep_1",
     title: "Soak Rajma / Kabuli Chana for Tomorrow's Lunch",
+    titleHi: "कल के दोपहर के लिए राजमा / काबुली चना भिगोएं",
     targetMeal: "Tomorrow's Lunch (Rajma / Chana)",
+    targetMealHi: "कल का दोपहर (राजमा / छोले)",
     idealTime: "Tonight by 8:30 PM",
+    idealTimeHi: "आज रात ८:३० बजे तक",
     instructions: "Take 1.5 cups dry rajma or chickpeas, wash twice in cold water, and soak in 4 cups lukewarm water with 1/2 tsp salt.",
-    whyItMatters: "Overnight soaking (8+ hours) breaks down complex oligosaccharides, preventing flatulence and reducing pressure cooking time by 60%."
+    instructionsHi: "१.५ कप सूखे राजमा या छोले धोकर ४ कप गुनगुने पानी में चुटकी भर नमक डालकर भिगो दें।",
+    whyItMatters: "Overnight soaking (8+ hours) breaks down complex oligosaccharides, preventing flatulence and reducing pressure cooking time by 60%.",
+    whyItMattersHi: "रात भर भिगोने से पाचन सुधरता है और कुकर में सीटी का समय ६०% कम हो जाता है।"
   },
   {
     id: "prep_2",
     title: "Set Fresh Curd (Dahi) for Tomorrow",
+    titleHi: "कल के लिए ताज़ा मीठा दही जमाएं",
     targetMeal: "All Day Meals (Breakfast / Raita)",
+    targetMealHi: "दिन भर के भोजन (नाश्ता / रायता)",
     idealTime: "Tonight by 9:00 PM",
+    idealTimeHi: "आज रात ९:०० बजे तक",
     instructions: "Boil 500ml milk, let it cool till lukewarm, whisk in 1 tsp starter curd (jaaman), and place in a warm covered spot.",
-    whyItMatters: "Homemade probiotic curd provides live lactobacillus cultures that protect the gut microbiome and aid digestion."
+    instructionsHi: "आधा लीटर दूध गुनगुना करें, १ चम्मच जामन मिलाएं और ढककर गर्म जगह रखें।",
+    whyItMatters: "Homemade probiotic curd provides live lactobacillus cultures that protect the gut microbiome and aid digestion.",
+    whyItMattersHi: "घर का जमाया ताज़ा दही पेट के लिए अमृत समान प्रोबायोटिक है।"
   },
   {
     id: "prep_3",
     title: "Boil 4 Potatoes & Keep in Fridge",
+    titleHi: "४ आलू उबालकर फ्रिज में रखें",
     targetMeal: "Tomorrow's Breakfast (Aloo Paratha / Poha)",
+    targetMealHi: "कल का नाश्ता (आलू पराठा / पोहा)",
     idealTime: "Tonight post-dinner",
+    idealTimeHi: "आज रात खाने के बाद",
     instructions: "Pressure cook 4 medium potatoes for 2 whistles. Once cooled, peel and place in a clean box in the refrigerator.",
-    whyItMatters: "Cold boiled potatoes develop resistant starch (which lowers glycemic spike) and won't turn soggy or tear dough."
+    instructionsHi: "४ मध्यम आलू २ सीटी तक उबालें, छीलकर साफ डिब्बे में फ्रिज में रख लें।",
+    whyItMatters: "Cold boiled potatoes develop resistant starch (which lowers glycemic spike) and won't turn soggy or tear dough.",
+    whyItMattersHi: "ठंडे उबले आलू से पराठे फटते नहीं हैं और सुबह का समय बचता है।"
   },
   {
     id: "prep_4",
     title: "Wash & Air-Dry Leafy Greens (Palak / Methi)",
+    titleHi: "हरी पत्तेदार सब्ज़ियां (पालक / मेथी) धोकर सुखाएं",
     targetMeal: "Tomorrow's Morning Sabzi / Paratha",
+    targetMealHi: "कल सुबह की सब्ज़ी / थेपला",
     idealTime: "Tonight after sorting",
+    idealTimeHi: "आज रात सोने से पहले",
     instructions: "Submerge greens in salted water to remove grit, lay on a clean cotton towel to dry completely before storing.",
-    whyItMatters: "Wet greens turn limp and slimy overnight; dry greens remain crisp and save 15 minutes of morning washing."
+    instructionsHi: "पत्तों को नमक वाले पानी में साफ करें और सूती कपड़े पर सुखाकर रखें।",
+    whyItMatters: "Wet greens turn limp and slimy overnight; dry greens remain crisp and save 15 minutes of morning washing.",
+    whyItMattersHi: "सूखे पत्ते ताज़ा रहते हैं और सुबह धोने व काटने के १५ मिनट बचते हैं।"
   },
   {
     id: "prep_5",
     title: "Soak 5 Almonds & Raisins for Morning Vitality",
+    titleHi: "सुबह की ऊर्जा के लिए ५ बादाम व मुनक्का भिगोएं",
     targetMeal: "Early Morning Vitality",
+    targetMealHi: "सुबह की ताजगी व स्फूर्ति",
     idealTime: "Tonight before sleeping",
+    idealTimeHi: "आज रात सोने से पहले",
     instructions: "Place 5 almonds and 10 black raisins in a small cup of water.",
-    whyItMatters: "Soaking removes tannin inhibitors from almond skins and activates natural enzymes for optimal brain and heart nutrition."
+    instructionsHi: "५ बादाम और १० मुनक्का एक कटोरी साफ पानी में भिगो दें।",
+    whyItMatters: "Soaking removes tannin inhibitors from almond skins and activates natural enzymes for optimal brain and heart nutrition.",
+    whyItMattersHi: "भीगे हुए बादाम के पोषक तत्व शरीर में तुरंत अवशोषित होते हैं।"
   }
 ];
 
@@ -657,11 +682,11 @@ const PANTRY_ITEMS = [
 
 // --- 4. WEEKLY 7-DAY ROTATION ---
 const WEEKLY_PLAN = [
-  { day: "Monday", hindi: "सोमवार (Light & Energizing)", bf: 0, ln: 0, dn: 0, prep: "Soak yellow moong dal tonight for Tuesday breakfast chilla." },
-  { day: "Tuesday", hindi: "मंगलवार (High Protein Day)", bf: 1, ln: 2, dn: 1, prep: "Boil 3 potatoes tonight for Wednesday morning breakfast." },
-  { day: "Wednesday", hindi: "बुधवार (High Fiber Midweek)", bf: 2, ln: 4, dn: 4, prep: "Wash and chop methi leaves tonight for Thursday theplas." },
-  { day: "Thursday", hindi: "गुरुवार (Digestive Rest & Detox)", bf: 4, ln: 0, dn: 2, prep: "Soak Rajma in warm water tonight for Friday family feast." },
-  { day: "Friday", hindi: "शुक्रवार (Weekend Warmup)", bf: 3, ln: 1, dn: 3, prep: "Soak Kabuli Chana tonight for Saturday Chole." },
-  { day: "Saturday", hindi: "शनिवार (Family Flavor Fiesta)", bf: 0, ln: 3, dn: 0, prep: "Set fresh curd (dahi) and check vegetables for Sunday." },
-  { day: "Sunday", hindi: "रविवार (Wholesome Indulgence)", bf: 1, ln: 2, dn: 1, prep: "Sort out groceries and wash leafy greens for the coming week." }
+  { day: "Monday", dayHi: "सोमवार", themeEn: "Light & Energizing", themeHi: "हल्का व स्फूर्तिदायक", bf: 0, ln: 0, dn: 0, prep: "Soak yellow moong dal tonight for Tuesday breakfast chilla.", prepHi: "मंगलवार के चीले के लिए आज रात मूंग दाल भिगो दें।" },
+  { day: "Tuesday", dayHi: "मंगलवार", themeEn: "High Protein Day", themeHi: "उच्च प्रोटीन दिवस", bf: 1, ln: 2, dn: 1, prep: "Boil 3 potatoes tonight for Wednesday morning breakfast.", prepHi: "बुधवार के नाश्ते के लिए आज रात ३ आलू उबाल लें।" },
+  { day: "Wednesday", dayHi: "बुधवार", themeEn: "High Fiber Midweek", themeHi: "पाचन व फाइबर दिवस", bf: 2, ln: 4, dn: 4, prep: "Wash and chop methi leaves tonight for Thursday theplas.", prepHi: "गुरुवार के थेपलों के लिए आज रात मेथी धोकर काट लें।" },
+  { day: "Thursday", dayHi: "गुरुवार", themeEn: "Digestive Rest & Detox", themeHi: "हल्का व सात्विक आहार", bf: 4, ln: 0, dn: 2, prep: "Soak Rajma in warm water tonight for Friday family feast.", prepHi: "शुक्रवार के भोजन के लिए आज रात गुनगुने पानी में राजमा भिगोएं।" },
+  { day: "Friday", dayHi: "शुक्रवार", themeEn: "Weekend Warmup", themeHi: "सप्ताहांत की तैयारी", bf: 3, ln: 1, dn: 3, prep: "Soak Kabuli Chana tonight for Saturday Chole.", prepHi: "शनिवार के छोलों के लिए आज रात काबुली चना भिगो दें।" },
+  { day: "Saturday", dayHi: "शनिवार", themeEn: "Family Flavor Fiesta", themeHi: "परिवार का पसंदीदा स्वाद", bf: 0, ln: 3, dn: 0, prep: "Set fresh curd (dahi) and check vegetables for Sunday.", prepHi: "रविवार के लिए ताज़ा मीठा दही जमाएं और सब्ज़ियां जांचें।" },
+  { day: "Sunday", dayHi: "रविवार", themeEn: "Wholesome Indulgence", themeHi: "संपूर्ण पारिवारिक भोज", bf: 1, ln: 2, dn: 1, prep: "Sort out groceries and wash leafy greens for the coming week.", prepHi: "अगले सप्ताह के लिए रसोई का सामान व्यवस्थित करें।" }
 ];

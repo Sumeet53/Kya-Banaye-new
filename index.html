@@ -212,6 +212,33 @@
       </div>
     </section>
 
+    <!-- VIEW 5: KITCHEN DIARY (रसोई डायरी / MEAL HISTORY) -->
+    <section id="view-history" class="app-view">
+      <div class="view-header-clean">
+        <div class="view-title-row">
+          <h2>रसोई डायरी (Kitchen Diary)</h2>
+          <button id="clearHistoryBtn" class="btn-clear-selection" onclick="clearCookingHistory()">Clear</button>
+        </div>
+        <p class="view-subtitle">Track confirmed meals by date to avoid repetitive menus.</p>
+      </div>
+
+      <!-- Quick Cooldown & Stats Card -->
+      <div class="history-stats-banner">
+        <div class="history-stat-box">
+          <span class="stat-number" id="historyTotalCount">0</span>
+          <span class="stat-label">Meals Cooked</span>
+        </div>
+        <div class="history-rule-notice">
+          <span>🛡️ <strong>3-Day Anti-Repeat Cooldown:</strong> Confirmed dishes won't reappear in menu shuffles for 3 days!</span>
+        </div>
+      </div>
+
+      <!-- Timeline Container -->
+      <div id="historyTimelineContainer" class="history-timeline-container">
+        <!-- Rendered via app.js -->
+      </div>
+    </section>
+
 
     <!-- VIEW 5: OPAL RASOI PRO & MONETIZATION HUB -->
     <section id="view-pro" class="app-view">
@@ -404,6 +431,10 @@
       <span class="nav-icon">📅</span>
       <span class="nav-label">साप्ताहिक</span>
     </button>
+    <button class="nav-tab" data-tab="history" onclick="switchTab('history')">
+      <span class="nav-icon">📖</span>
+      <span class="nav-label">डायरी</span>
+    </button>
     <button class="nav-tab" data-tab="pro" onclick="switchTab('pro')">
       <span class="nav-icon">💎</span>
       <span class="nav-label">Pro</span>
@@ -411,6 +442,7 @@
   </nav>
 
   <!-- PWA Scripts -->
+  <script src="recipes.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

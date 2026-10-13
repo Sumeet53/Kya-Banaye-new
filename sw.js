@@ -1,8 +1,9 @@
-const CACHE_NAME = 'aaj-kya-banega-v4';
+const CACHE_NAME = 'aaj-kya-banega-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
+  './recipes.js',
   './app.js',
   './manifest.json'
 ];

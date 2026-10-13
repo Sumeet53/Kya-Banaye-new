@@ -97,6 +97,103 @@ const MEAL_DATABASE = {
         "Cook on hot tawa applying light oil on both sides until light brown spots appear.",
         "Serve warm with fresh dahi."
       ]
+    },
+    {
+      id: "bf_6",
+      name: "Rava Vegetable Upma with Coconut Chutney",
+      hindiTitle: "सूजी / रवा वेज उपमा (नारियल चटनी के साथ)",
+      cookTimeMinutes: 15,
+      difficulty: "Super Easy",
+      tags: ["Quick 15 Mins", "Light & Fluffy", "South Indian"],
+      nutrition: { calories: 240, protein: "7g", fiber: "4g" },
+      healthAdvice: "Semolina is easily digestible, provides instant glucose energy, and vegetables add essential micronutrients.",
+      advancePrepNeeded: "Optional: Dry-roast suji (rawa) for 3 minutes on low flame and store in an airtight jar.",
+      ingredients: ["Roasted Suji (Semolina)", "Mustard Seeds", "Curry Leaves", "Green Peas", "Carrots", "Ginger", "Cashews / Peanuts", "Lemon Juice", "Ghee"],
+      steps: [
+        "Dry roast suji on low heat until aromatic without browning; keep aside.",
+        "Heat 1 tbsp ghee in kadai; temper mustard seeds, curry leaves, green chillies, ginger, and cashews.",
+        "Add finely chopped carrots and green peas; sauté for 2 mins with salt.",
+        "Add 2.5 cups water and bring to a rolling boil.",
+        "Slowly pour in roasted suji in a steady stream while whisking continuously to avoid lumps.",
+        "Cover on low flame for 2 minutes, stir in fresh lemon juice and fresh grated coconut."
+      ]
+    },
+    {
+      id: "bf_7",
+      name: "Sprouted Moong Chaat with Pomegranate & Lemon",
+      hindiTitle: "अंकुरित मूंग चाट (अनार और नींबू के साथ)",
+      cookTimeMinutes: 10,
+      difficulty: "Super Easy",
+      tags: ["No Cooking", "Superfood", "High Protein"],
+      nutrition: { calories: 190, protein: "12g", fiber: "8g" },
+      healthAdvice: "Sprouting multiplies vitamin C and bioavailable enzymes by 300%; extraordinary for cellular energy and weight management.",
+      advancePrepNeeded: "MANDATORY: Keep green moong sprouts ready in a clean muslin cloth or container.",
+      ingredients: ["Sprouted Green Moong", "Pomegranate Seeds (Anaar)", "Cucumber", "Tomatoes", "Green Chillies", "Chaat Masala", "Lemon Juice", "Roasted Cumin Powder"],
+      steps: [
+        "Optionally steam sprouts for 3 minutes or use fresh raw.",
+        "In a mixing bowl, combine sprouts, diced cucumber, tomatoes, and ruby pomegranate seeds.",
+        "Season with chaat masala, roasted jeera powder, black salt, and fresh lemon juice.",
+        "Toss well and garnish with chopped fresh coriander.",
+        "Enjoy fresh with morning tea or warm water."
+      ]
+    },
+    {
+      id: "bf_8",
+      name: "Stuffed Gobhi & Green Peas Paratha with Curd",
+      hindiTitle: "गोभी मटर परांठा (दही और मक्खन के साथ)",
+      cookTimeMinutes: 25,
+      difficulty: "Moderate",
+      tags: ["Winter Comfort", "Wholesome", "High Fiber"],
+      nutrition: { calories: 310, protein: "8g", fiber: "7g" },
+      healthAdvice: "Cauliflower is packed with sulforaphane and choline, supporting brain health and liver detoxification.",
+      advancePrepNeeded: "Grate fresh cauliflower and squeeze excess moisture using a clean cloth tonight.",
+      ingredients: ["Whole Wheat Flour (Atta)", "Grated Cauliflower (Gobhi)", "Crushed Green Peas (Matar)", "Ajwain (Carom seeds)", "Green Chillies", "Amchur (Dry Mango)", "Fresh Coriander", "Desi Ghee"],
+      steps: [
+        "Mix grated goblet and crushed peas with ajwain, amchur, green chillies, and salt.",
+        "Roll out a portion of soft whole wheat dough into a medium round.",
+        "Place generous stuffing in center, seal edges, and gently roll out without tearing.",
+        "Roast on hot tawa with minimal desi ghee until golden brown crisp spots appear on both sides.",
+        "Serve hot with a bowl of homemade curd."
+      ]
+    },
+    {
+      id: "bf_9",
+      name: "Fluffy Sabudana Khichdi with Crunchy Peanuts",
+      hindiTitle: "खिली-खिली साबूदाना खिचड़ी (मूंगफली के साथ)",
+      cookTimeMinutes: 20,
+      difficulty: "Easy",
+      tags: ["Gluten Free", "Energy Booster", "Fasting Special"],
+      nutrition: { calories: 330, protein: "6g", fiber: "3g" },
+      healthAdvice: "Tapioca starch is gentle on the digestive tract and provides instant, sustained stamina without heavy gluten.",
+      advancePrepNeeded: "CRITICAL: Rinse sabudana twice, drain, and soak with just enough water to touch surface for 4-5 hours overnight.",
+      ingredients: ["Soaked Sabudana (Tapioca pearls)", "Coarsely crushed Roasted Peanuts", "Boiled Potato cubes", "Cumin Seeds", "Green Chillies", "Curry Leaves", "Sendha Namak (Rock Salt)", "Lemon Juice"],
+      steps: [
+        "Ensure soaked sabudana pearls are soft and separate when pressed between fingers.",
+        "Heat ghee in kadai; crackle cumin seeds, green chillies, and curry leaves.",
+        "Toss in boiled potato cubes and coarsely crushed roasted peanuts.",
+        "Add soaked sabudana, rock salt, and a pinch of sugar; toss gently on medium flame.",
+        "Cover for 2 minutes until pearls turn translucent.",
+        "Drizzle fresh lemon juice and fresh coriander."
+      ]
+    },
+    {
+      id: "bf_10",
+      name: "Instant Oats & Vegetable Cheela with Mint Chutney",
+      hindiTitle: "इंस्टेंट ओट्स वेज चीला (हरी चटनी के साथ)",
+      cookTimeMinutes: 15,
+      difficulty: "Super Easy",
+      tags: ["Heart Healthy", "Weight Watchers", "Quick 15 Mins"],
+      nutrition: { calories: 220, protein: "10g", fiber: "6g" },
+      healthAdvice: "Rich in beta-glucan fiber which helps reduce bad cholesterol and keeps you full till lunchtime.",
+      advancePrepNeeded: "None! Grind rolled oats into a coarse powder in 30 seconds.",
+      ingredients: ["Rolled Oats Powder", "Besan (2 tbsp)", "Grated Carrots", "Finely chopped Capsicum", "Green Chillies", "Ginger Paste", "Ajwain", "Fresh Mint Chutney"],
+      steps: [
+        "In a bowl, mix oat powder, besan, grated carrots, capsicum, ginger paste, ajwain, and salt.",
+        "Whisk in water to make a smooth pouring batter of medium consistency; rest 5 minutes.",
+        "Pour a ladleful on a hot greased tawa and spread gently in circular motion.",
+        "Cook on medium flame until edges lift; flip and cook the other side until crispy.",
+        "Serve hot with coriander-mint chutney."
+      ]
     }
   ],
 
@@ -195,6 +292,105 @@ const MEAL_DATABASE = {
         "Simmer dal-rice khichdi in pressure cooker with ghee and turmeric.",
         "Pour steaming sweet-sour kadhi over khichdi and enjoy."
       ]
+    },
+    {
+      id: "ln_6",
+      name: "Homestyle Dal Makhani + Jeera Rice + Onion Salad",
+      hindiTitle: "होमस्टाइल दाल मखनी + जीरा राइस + सलाद",
+      cookTimeMinutes: 45,
+      difficulty: "Moderate",
+      tags: ["Rich & Hearty", "Classic Comfort", "Weekend Special"],
+      nutrition: { calories: 470, protein: "18g", fiber: "11g" },
+      healthAdvice: "Whole black urad dal provides iron, magnesium, and resistant fiber. Home-cooked with moderate butter keeps it healthy.",
+      advancePrepNeeded: "MANDATORY: Soak whole black urad dal and 2 tbsp rajma overnight tonight.",
+      ingredients: ["Whole Black Urad Dal", "Rajma (Kidney Beans)", "Tomatoes Pureed", "Ginger-Garlic Paste", "Butter (1 tbsp)", "Kasuri Methi", "Kashmiri Degi Mirch", "Basmati Rice", "Cumin Seeds"],
+      steps: [
+        "Pressure cook soaked urad dal and rajma with black cardamom and salt for 6-7 whistles until completely soft.",
+        "In a heavy bottom pan, cook ginger-garlic paste and fresh tomato puree with deghi mirch until oil separates.",
+        "Add boiled dal along with cooking liquor; mash lightly with ladle.",
+        "Slow-simmer on low heat for 25-30 minutes, stirring occasionally for natural velvety creaminess.",
+        "Finish with 1 tbsp butter and crushed kasuri methi; serve with fragrant jeera rice."
+      ]
+    },
+    {
+      id: "ln_7",
+      name: "Smoked Baingan Ka Bharta + Tawa Phulkas + Boondi Raita",
+      hindiTitle: "भुना हुआ बैंगन का भर्ता + नर्म फुल्के + बूंदी रायता",
+      cookTimeMinutes: 35,
+      difficulty: "Easy",
+      tags: ["Smoky Flavor", "Low Calorie", "Traditional Desi"],
+      nutrition: { calories: 360, protein: "11g", fiber: "10g" },
+      healthAdvice: "Eggplant is rich in anthocyanins (nasunin) that protect brain cell membranes and promote vascular elasticity.",
+      advancePrepNeeded: "Check that a large, light-weight bharta baingan (eggplant) with glossy skin is available.",
+      ingredients: ["Large Bharta Baingan (Eggplant)", "Green Peas (Matar)", "Finely chopped Onions", "Tomatoes", "Crushed Garlic", "Green Chillies", "Mustard Oil", "Fresh Coriander"],
+      steps: [
+        "Slit baingan, stuff garlic cloves inside, coat with drop of oil and roast over open flame until skin is charred.",
+        "Peel charred skin, mash pulp thoroughly with a fork.",
+        "Heat mustard oil in kadai; sauté chopped onions, green chillies, and green peas until tender.",
+        "Add chopped tomatoes, turmeric, red chilli, and coriander powder; cook until soft.",
+        "Mix in mashed roasted baingan and stir-fry on high flame for 5 minutes for authentic dhaba aroma.",
+        "Serve hot with warm phulkas and cool boondi raita."
+      ]
+    },
+    {
+      id: "ln_8",
+      name: "Kashmiri Dum Aloo + Steamed Basmati Rice + Curd",
+      hindiTitle: "कश्मीरी दम आलू + चावल + ताज़ा दही",
+      cookTimeMinutes: 35,
+      difficulty: "Moderate",
+      tags: ["Aromatic Spices", "Fennel & Ginger Gravy", "Festive"],
+      nutrition: { calories: 440, protein: "10g", fiber: "7g" },
+      healthAdvice: "Fennel and dry ginger (sonth) aid digestion, reduce acid reflux, and impart deep warming flavor without heavy onion-garlic.",
+      advancePrepNeeded: "Boil baby potatoes tonight, peel and keep in fridge.",
+      ingredients: ["Baby Potatoes (Boiled & Pricked)", "Whisked Curd (Dahi)", "Kashmiri Red Chilli Powder", "Fennel Powder (Saunf)", "Dry Ginger Powder (Sonth)", "Hing", "Mustard Oil", "Basmati Rice"],
+      steps: [
+        "Prick boiled baby potatoes with fork; shallow fry in mustard oil until golden crisp.",
+        "Whisk curd with Kashmiri chilli, fennel powder, ginger powder, and coriander powder.",
+        "Temper mustard oil with hing and cloves; turn flame low and pour in spiced curd mixture whisking rapidly.",
+        "Simmer until gravy thickens and oil glistens on top.",
+        "Add fried baby potatoes, cover tightly with lid on low heat ('dum') for 10 minutes.",
+        "Serve with piping hot steamed basmati rice."
+      ]
+    },
+    {
+      id: "ln_9",
+      name: "Matar Paneer Masala + Missi Roti + Green Salad",
+      hindiTitle: "मटर पनीर मसाला + मिस्सी रोटी + सलाद",
+      cookTimeMinutes: 30,
+      difficulty: "Easy",
+      tags: ["High Protein", "Family Feast", "Iron & Calcium"],
+      nutrition: { calories: 490, protein: "23g", fiber: "10g" },
+      healthAdvice: "Combining cottage cheese (paneer) with chickpea flour (missi roti) provides an exceptional dual vegetarian protein punch.",
+      advancePrepNeeded: "Thaw green peas and ensure fresh paneer is available in fridge.",
+      ingredients: ["Fresh Paneer Cubes", "Tender Green Peas (Matar)", "Onions", "Tomatoes", "Ginger-Garlic", "Garam Masala", "Kasuri Methi", "Atta & Besan for Missi Roti"],
+      steps: [
+        "Sauté onions, ginger, garlic, and tomatoes; puree into a velvety masala base.",
+        "Cook puree in 1 tsp ghee until oil droplets separate.",
+        "Add green peas and 1 cup warm water; simmer until peas are tender.",
+        "Gently slide in soft paneer cubes; simmer on low heat for 3 minutes.",
+        "Knead whole wheat flour with besan, ajwain, and kasuri methi; roll and cook crisp missi rotis.",
+        "Serve fresh with crunchy onion-cucumber salad."
+      ]
+    },
+    {
+      id: "ln_10",
+      name: "Kathiyawadi Veggie Khichdi + Kadhi + Roasted Papad",
+      hindiTitle: "काठियावाड़ी वेज खिचड़ी + कढ़ी + भुना पापड़",
+      cookTimeMinutes: 30,
+      difficulty: "Super Easy",
+      tags: ["One-Pot Meal", "Gut Healing", "Nutrient Dense"],
+      nutrition: { calories: 400, protein: "15g", fiber: "9g" },
+      healthAdvice: "Slow-cooked lentil and vegetable khichdi provides clean glycogen replenishment without post-lunch lethargy.",
+      advancePrepNeeded: "None! Chop any vegetables available in the crisper.",
+      ingredients: ["Rice", "Toor Dal & Moong Dal", "Diced Potatoes", "Green Peas", "Carrots", "Raw Peanuts", "Desi Ghee", "Whole Spices", "Sour Curd & Besan for Kadhi"],
+      steps: [
+        "Rinse rice, toor dal, and moong dal together.",
+        "Heat ghee in pressure cooker; temper with mustard seeds, cumin, cloves, cinnamon, and whole red chillies.",
+        "Add diced veggies, raw peanuts, turmeric, and hing; sauté for 1 minute.",
+        "Add washed grains, 4 cups water, and salt; pressure cook for 3 whistles.",
+        "Simmer sweet-and-sour spiced Gujarati kadhi on the side.",
+        "Top hot khichdi with a dollop of pure desi ghee and enjoy with roasted papad."
+      ]
     }
   ],
 
@@ -292,6 +488,102 @@ const MEAL_DATABASE = {
         "Tarka the dal with ghee, crushed garlic, and dry red chilli.",
         "Serve piping hot with fresh rotis."
       ]
+    },
+    {
+      id: "dn_6",
+      name: "Moong Dal Soup + Sautéed Garlic Paneer & Veggies",
+      hindiTitle: "मूंग दाल सूप + गार्लिक पनीर व सब्जियां",
+      cookTimeMinutes: 20,
+      difficulty: "Super Easy",
+      tags: ["High Protein", "Low Carb", "Keto Friendly"],
+      nutrition: { calories: 310, protein: "21g", fiber: "6g" },
+      healthAdvice: "Light, ultra-low glycemic night meal that prevents bloating and supports overnight fat metabolism.",
+      advancePrepNeeded: "None! Yellow moong dal cooks in 10 minutes.",
+      ingredients: ["Yellow Moong Dal", "Fresh Paneer Cubes", "French Beans", "Carrots", "Garlic Cloves", "Black Pepper", "Lemon Juice", "Ghee (1 tsp)"],
+      steps: [
+        "Pressure cook yellow moong dal with turmeric and ginger; blend into a light, velvety soup.",
+        "Season soup with freshly cracked black pepper and a squeeze of fresh lemon juice.",
+        "In a hot pan, add 1 tsp ghee; toss sliced garlic, carrots, french beans, and paneer cubes for 4 minutes until crisp-tender.",
+        "Season veggies with rock salt and oregano/chaat masala.",
+        "Enjoy warm soup alongside sautéed protein bowl."
+      ]
+    },
+    {
+      id: "dn_7",
+      name: "Aloo Gobhi Matar Rasedar + Soft Phulkas + Salad",
+      hindiTitle: "आलू गोभी मटर रसेदार + नर्म फुल्के + सलाद",
+      cookTimeMinutes: 25,
+      difficulty: "Super Easy",
+      tags: ["Home Comfort", "Soul Food", "Under 30 Mins"],
+      nutrition: { calories: 320, protein: "9g", fiber: "8g" },
+      healthAdvice: "Cruciferous cauliflower combined with tender green peas and light tomato broth provides deep antioxidant satiety.",
+      advancePrepNeeded: "Wash cauliflower florets in warm salted water.",
+      ingredients: ["Cauliflower Florets (Gobhi)", "Diced Potatoes (Aloo)", "Green Peas (Matar)", "Tomato Puree", "Ginger", "Cumin", "Turmeric", "Coriander Powder", "Phulkas"],
+      steps: [
+        "Sauté cumin and grated ginger in 1 tbsp oil; add fresh tomato puree and cook till aromatic.",
+        "Toss in potato cubes, cauliflower florets, and green peas.",
+        "Add turmeric, coriander powder, Kashmiri chilli, salt, and 1.5 cups water.",
+        "Pressure cook for 2 whistles on medium heat.",
+        "Garnish with chopped coriander and serve warm with 2 light whole wheat phulkas."
+      ]
+    },
+    {
+      id: "dn_8",
+      name: "Besan Shimla Mirch (Capsicum Stir-Fry) + Phulkas + Chaas",
+      hindiTitle: "बेसन शिमला मिर्च + फुल्के + पुदीना छाछ",
+      cookTimeMinutes: 20,
+      difficulty: "Super Easy",
+      tags: ["Quick 20 Mins", "Crispy & Savory", "Low GI"],
+      nutrition: { calories: 290, protein: "11g", fiber: "7g" },
+      healthAdvice: "Bell peppers are among the richest sources of dietary vitamin C and lutein, while besan adds low-glycemic vegetable protein.",
+      advancePrepNeeded: "Dry roast 3 tbsp besan for 2 minutes to keep it nutty and ready.",
+      ingredients: ["Green Capsicum (Diced Shimla Mirch)", "Roasted Besan (Gram Flour)", "Cumin Seeds", "Hing", "Turmeric", "Amchur (Dry Mango)", "Red Chilli Powder", "Whole Wheat Phulkas"],
+      steps: [
+        "Heat 1 tbsp oil; splutter cumin seeds and generous hing.",
+        "Add diced crunchy capsicum and sauté on medium-high flame for 3 minutes.",
+        "Lower flame; sprinkle roasted besan, turmeric, amchur, coriander powder, and salt evenly over peppers.",
+        "Sprinkle 1 tbsp water, cover with lid for 2 minutes so the besan cooks and adheres to capsicum.",
+        "Stir gently until fragrant and slightly crispy; serve with warm rotis."
+      ]
+    },
+    {
+      id: "dn_9",
+      name: "Dal Palak (Spinach Lentil Curry) + Steamed Rice + Papad",
+      hindiTitle: "पौष्टिक दाल पालक + उबले चावल + पापड़",
+      cookTimeMinutes: 25,
+      difficulty: "Easy",
+      tags: ["Iron Powerhouse", "Deep Nutrition", "Easy Digestion"],
+      nutrition: { calories: 350, protein: "16g", fiber: "9g" },
+      healthAdvice: "Leafy spinach simmered with yellow lentils releases easily absorbable folate, non-heme iron, and dietary fibers.",
+      advancePrepNeeded: "Wash spinach leaves thoroughly and finely shred tonight.",
+      ingredients: ["Toor Dal or Moong Dal", "Fresh Shredded Spinach (Palak)", "Garlic Cloves", "Cumin Seeds", "Desi Ghee", "Tomatoes", "Turmeric", "Steamed Basmati Rice"],
+      steps: [
+        "Pressure cook washed dal and shredded spinach together with turmeric, salt, and water for 3 whistles.",
+        "Heat 1 tbsp ghee in tadka pan; fry cumin seeds, generous crushed garlic, and whole dry red chilli until garlic turns light golden.",
+        "Add chopped tomato to tadka and cook until soft.",
+        "Pour sizzling fragrant garlic tadka over cooked dal palak.",
+        "Serve hot with steamed rice and crunchy roasted papad."
+      ]
+    },
+    {
+      id: "dn_10",
+      name: "Fragrant Vegetable Pulao with Cucumber & Mint Raita",
+      hindiTitle: "वेज पुलाव + खीरा पुदीना रायता",
+      cookTimeMinutes: 25,
+      difficulty: "Easy",
+      tags: ["One-Pot Dinner", "Cooling & Light", "Fragrant"],
+      nutrition: { calories: 370, protein: "11g", fiber: "7g" },
+      healthAdvice: "Cooling cucumber mint raita offsets whole spices, creating an easily assimilable, soothing dinner for restful sleep.",
+      advancePrepNeeded: "Soak basmati rice for 20 minutes before cooking.",
+      ingredients: ["Basmati Rice", "Diced Carrots", "Green Peas", "French Beans", "Whole Spices (Cinnamon, Bay Leaf, Cardamom)", "Desi Ghee", "Fresh Cucumber & Curd for Raita"],
+      steps: [
+        "Heat 1 tbsp ghee in cooker; sauté cinnamon, cloves, bay leaf, and cardamom until fragrant.",
+        "Add sliced onions, diced carrots, green peas, and beans; sauté for 2 mins.",
+        "Add soaked basmati rice, 1.75 cups water, salt, and a pinch of garam masala.",
+        "Pressure cook for 1 whistle on medium flame; let steam release naturally.",
+        "Gently fluff rice grains with a fork.",
+        "Serve with chilled cucumber-mint curd raita."
+      ]
     }
   ]
 };
@@ -353,7 +645,14 @@ const PANTRY_ITEMS = [
   { id: "p_9", name: "Daliya (Broken Wheat)", cat: "grain" },
   { id: "p_10", name: "Dahi / Curd", cat: "dairy" },
   { id: "p_11", name: "Bhindi (Okra)", cat: "veggie" },
-  { id: "p_12", name: "Tomatoes & Onions", cat: "veggie" }
+  { id: "p_12", name: "Tomatoes & Onions", cat: "veggie" },
+  { id: "p_13", name: "Matar (Green Peas)", cat: "veggie" },
+  { id: "p_14", name: "Gobhi (Cauliflower)", cat: "veggie" },
+  { id: "p_15", name: "Suji / Rawa (Semolina)", cat: "grain" },
+  { id: "p_16", name: "Oats", cat: "grain" },
+  { id: "p_17", name: "Rajma (Kidney Beans)", cat: "grain" },
+  { id: "p_18", name: "Kabuli Chana (Chickpeas)", cat: "grain" },
+  { id: "p_19", name: "Shimla Mirch (Capsicum)", cat: "veggie" }
 ];
 
 // --- 4. WEEKLY 7-DAY ROTATION ---

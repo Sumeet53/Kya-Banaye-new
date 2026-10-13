@@ -1748,3 +1748,276 @@ input:checked + .slider:before {
   color: var(--blue-primary);
   font-weight: 800;
 }
+
+/* --- COOKED THIS CONFIRMATION & KITCHEN DIARY STYLES --- */
+.btn-cooked-action {
+  background: var(--surface-alt);
+  color: var(--text-body);
+  border: 1.5px solid var(--border);
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-cooked-action:hover {
+  background: #DCFCE7;
+  color: #166534;
+  border-color: #86EFAC;
+}
+
+.btn-cooked-action.is-cooked {
+  background: #16A34A;
+  color: #FFFFFF;
+  border-color: #15803D;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+}
+
+.btn-cooked-action.is-cooked:hover {
+  background: #15803D;
+}
+
+/* Cooked Today Banner inside card */
+.cooked-badge-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #15803D;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.cooked-badge-ribbon .btn-undo-link {
+  background: none;
+  border: none;
+  color: #DC2626;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* History Stats Banner */
+.history-stats-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.history-stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue-tint);
+  border: 1px solid var(--blue-border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  min-width: 68px;
+}
+
+.history-stat-box .stat-number {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--blue-primary);
+  line-height: 1.1;
+}
+
+.history-stat-box .stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.history-rule-notice {
+  font-size: 12px;
+  color: var(--text-body);
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* History Timeline */
+.history-timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.history-empty-state {
+  text-align: center;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 32px 16px;
+  color: var(--text-muted);
+}
+
+.history-empty-state .empty-icon {
+  font-size: 38px;
+  margin-bottom: 8px;
+}
+
+.history-empty-state h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.history-empty-state p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.history-date-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.history-date-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.history-date-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.history-relative-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+.history-meal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+.history-item-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.history-item-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.history-item-badge.breakfast {
+  background: #FFF3E0;
+  color: #C2410C;
+}
+
+.history-item-badge.lunch {
+  background: #F0FDF4;
+  color: #15803D;
+}
+
+.history-item-badge.dinner {
+  background: #F3E8FF;
+  color: #7E22CE;
+}
+
+.history-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-dish-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.history-dish-hindi {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.history-item-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-history-recipe {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue-primary);
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.btn-history-recipe:hover {
+  background: var(--blue-light);
+}
+
+.btn-history-delete {
+  background: none;
+  border: none;
+  color: #9CA3AF;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.btn-history-delete:hover {
+  color: #DC2626;
+  background: #FEE2E2;
+}
+

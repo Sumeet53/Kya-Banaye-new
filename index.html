@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kya Banaye — Daily Indian Veg Meal Planner</title>
+  <title>क्या बनाएं — दैनिक शाकाहारी भोजन योजना</title>
   
   <!-- Modern Typography: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- PWA Metadata & Theme -->
-  <meta name="theme-color" content="#0284C7">
+  <meta name="theme-color" content="#0B57D0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="manifest.json">
@@ -23,53 +23,65 @@
   <div id="inAppNotificationToast" class="notification-toast hidden">
     <div class="toast-icon">🔔</div>
     <div class="toast-content">
-      <h5 id="toastTitle">8:30 PM Reminder</h5>
-      <p id="toastBody">Kal Ki Taiyari: Did you soak pulses or set dahi?</p>
+      <h5 id="toastTitle">८:३० बजे का रिमाइंडर</h5>
+      <p id="toastBody">कल की तैयारी: क्या आपने दाल भिगो दी या दही जमा दिया?</p>
     </div>
     <button class="toast-close-btn" onclick="dismissToast()">&times;</button>
   </div>
 
-  <!-- Minimalist App Header -->
+  <!-- Minimalist App Header (Centered with Top-Right Language Switcher) -->
   <header class="app-header">
-    <div class="brand-group">
-      <span class="brand-logo-icon">🍲</span>
-      <div class="brand-text">
-        <h1 class="app-title">Kya Banaye</h1>
-        <span class="app-subtitle">Shuddh Shakahari Rasoi</span>
+    <div class="header-inner">
+      <div class="brand-group">
+        <span class="brand-logo-icon">🍲</span>
+        <div class="brand-text">
+          <h1 class="app-title" id="appHeaderTitle">क्या बनाएं</h1>
+          <span class="app-subtitle" id="appHeaderSubtitle">शुद्ध शाकाहारी रसोई</span>
+        </div>
       </div>
+      <button id="langToggleBtn" class="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language / भाषा बदलें" aria-label="Switch Language">
+        <span class="lang-globe">🌐</span>
+        <span id="langBtnText">English</span>
+      </button>
     </div>
   </header>
 
-  <!-- Main Views Container -->
+  <!-- Main Views Container (Centered Horizontally & Vertically) -->
   <main id="appContent" class="main-content">
 
     <!-- VIEW 1: TODAY'S CURATED MENU -->
     <section id="view-today" class="app-view active">
       
-      <!-- Date Bar & Big Shuffle Button -->
+      <!-- Date Bar -->
       <div class="today-top-bar">
         <div class="today-date-info">
-          <span class="live-date-pill" id="currentDatePill">Today's Menu • आज का खाना</span>
+          <span class="live-date-pill" id="currentDatePill">आज का मेनू</span>
         </div>
       </div>
 
       <!-- Prominent BIG SHUFFLE Button -->
       <div class="shuffle-banner-container">
-        <button id="replanAllBtn" class="big-shuffle-btn" title="Shuffle all 3 meals while skipping dishes cooked in last 3 days">
+        <button id="replanAllBtn" class="big-shuffle-btn" title="सभी भोजन बदलें">
           <span class="shuffle-icon">🔄</span>
-          <span class="shuffle-text">SHUFFLE ALL MEALS (मेन्यू बदलें)</span>
+          <span class="shuffle-text" id="replanBtnText">सभी व्यंजन बदलें</span>
         </button>
       </div>
 
-      <!-- Segmented Meal Filter: Declutters view by letting user focus on 1 meal or all -->
-      <div class="segmented-meal-filter">
-        <button class="filter-chip active" data-filter="all" onclick="filterMeals('all')">✨ All (3)</button>
-        <button class="filter-chip" data-filter="breakfast" onclick="filterMeals('breakfast')">🌅 Breakfast</button>
-        <button class="filter-chip" data-filter="lunch" onclick="filterMeals('lunch')">☀️ Lunch</button>
-        <button class="filter-chip" data-filter="dinner" onclick="filterMeals('dinner')">🌙 Dinner</button>
+      <!-- Segmented Meal Filter (Zero Vertical Scrolling in Single Meal View) -->
+      <div class="segmented-meal-filter" id="mealFilterGroup">
+        <button class="filter-chip active" data-filter="all" onclick="filterMeals('all')" id="filterChipAll">✨ सभी (3)</button>
+        <button class="filter-chip" data-filter="breakfast" onclick="filterMeals('breakfast')" id="filterChipBf">🌅 नाश्ता</button>
+        <button class="filter-chip" data-filter="lunch" onclick="filterMeals('lunch')" id="filterChipLn">☀️ दोपहर</button>
+        <button class="filter-chip" data-filter="dinner" onclick="filterMeals('dinner')" id="filterChipDn">🌙 रात</button>
       </div>
 
-      <!-- Meal Cards Container (Decluttered, readable, focused) -->
+      <!-- Scroll Down Guidance Cue (Shown when 'all' is active to guide user) -->
+      <div id="scrollDownCue" class="scroll-down-cue" onclick="scrollToNextMeal()" title="नीचे स्क्रॉल करें">
+        <span class="scroll-cue-arrow">👇</span>
+        <span id="scrollCueText" class="scroll-cue-text">दोपहर और रात के भोजन के लिए नीचे स्क्रॉल करें</span>
+      </div>
+
+      <!-- Meal Cards Container (Centered & Focused) -->
       <div class="meal-cards-container">
         <!-- Breakfast Card -->
         <div class="meal-card" id="breakfastCard">
@@ -95,16 +107,16 @@
       <!-- Minimalist Prep Header -->
       <div class="view-header-clean">
         <div class="view-title-row">
-          <h2>कल की तैयारी (Advance Prep)</h2>
-          <span class="badge-status" id="prepStatusBadge">0/5 Done</span>
+          <h2 id="prepViewTitle">कल की तैयारी</h2>
+          <span class="badge-status" id="prepStatusBadge">0/5 पूर्ण</span>
         </div>
-        <p class="view-subtitle">10 minutes tonight saves 30 minutes of morning kitchen rush.</p>
+        <p class="view-subtitle" id="prepViewSubtitle">रात के १० मिनट सुबह की भागदौड़ से ३० मिनट बचाते हैं।</p>
 
         <!-- Readiness Progress -->
         <div class="prep-progress-card">
           <div class="progress-labels">
-            <span>Tonight's Kitchen Readiness</span>
-            <strong id="prepPercentageText">0% Ready</strong>
+            <span id="prepReadinessLabel">रसोई की तैयारी स्थिति</span>
+            <strong id="prepPercentageText">0% तैयार</strong>
           </div>
           <div class="progress-bar-bg">
             <div id="prepProgressBar" class="progress-bar-fill" style="width: 0%"></div>
@@ -116,16 +128,16 @@
       <div class="reminder-card-clean">
         <div class="reminder-info">
           <span class="reminder-icon">🔔</span>
-          <div>
-            <h4>8:30 PM Nightly Reminder</h4>
-            <p id="reminderStatusDesc">Daily notification to soak pulses & set dahi for tomorrow.</p>
+          <div class="reminder-text-col">
+            <h4 id="reminderCardTitle">८:३० बजे रात का रिमाइंडर</h4>
+            <p id="reminderStatusDesc">दाल भिगोने और दही जमाने के लिए रोज़ाना सूचना।</p>
           </div>
         </div>
         <div class="reminder-controls">
-          <button id="testNotificationBtn" class="btn-test-alert" title="Test notification alert">
-            Test Alert
+          <button id="testNotificationBtn" class="btn-test-alert" title="रिमाइंडर सूचना जांचें">
+            <span id="testAlertBtnText">जांचें</span>
           </button>
-          <label class="switch" title="Toggle 8:30 PM reminder">
+          <label class="switch" title="रिमाइंडर ऑन/ऑफ करें">
             <input type="checkbox" id="prepReminderToggle" checked>
             <span class="slider round"></span>
           </label>
@@ -134,7 +146,7 @@
 
       <!-- Interactive Prep Checklist -->
       <div class="checklist-header">
-        <h3>Tonight's Tasks (रात के कार्य)</h3>
+        <h3 id="prepChecklistHeading">आज रात के कार्य</h3>
       </div>
       <div id="prepChecklistContainer" class="prep-list-clean">
         <!-- Rendered via app.js -->
@@ -142,8 +154,10 @@
 
       <!-- Add Custom Prep Note -->
       <div class="custom-prep-box-clean">
-        <input type="text" id="customPrepInput" placeholder="Add custom reminder (e.g. defrost peas)...">
-        <button id="addCustomPrepBtn" class="btn-add-prep">+ Add</button>
+        <input type="text" id="customPrepInput" placeholder="नया रिमाइंडर जोड़ें (उदा. मटर डीफ्रॉस्ट करें)...">
+        <button id="addCustomPrepBtn" class="btn-add-prep">
+          <span id="addCustomBtnText">+ जोड़ें</span>
+        </button>
       </div>
     </section>
 
@@ -153,25 +167,27 @@
       <!-- Minimalist Header -->
       <div class="view-header-clean">
         <div class="view-title-row">
-          <h2>साप्ताहिक भोजन योजना (7-Day)</h2>
-          <button id="shareWeeklyBtn" class="btn-share-clean">📤 Share</button>
+          <h2 id="weeklyViewTitle">साप्ताहिक भोजन योजना</h2>
+          <button id="shareWeeklyBtn" class="btn-share-clean">
+            <span id="shareWeeklyBtnText">📤 शेयर करें</span>
+          </button>
         </div>
-        <p class="view-subtitle">Balanced rotation of dals, vegetables, and high-protein meals.</p>
+        <p class="view-subtitle" id="weeklyViewSubtitle">दाल, हरी सब्ज़ियां और संतुलित पोषण का ७-दिवसीय चक्र।</p>
       </div>
 
-      <!-- Week Day Selector (No horizontal scroll: 7-day grid + full-width View Full Week Plan) -->
+      <!-- Week Day Selector (7-Day Grid + Full Width View All) -->
       <div class="week-selector-container">
-        <div class="week-days-grid">
-          <button class="day-tab active" data-day="0" onclick="selectWeeklyDay(0)">Mon</button>
-          <button class="day-tab" data-day="1" onclick="selectWeeklyDay(1)">Tue</button>
-          <button class="day-tab" data-day="2" onclick="selectWeeklyDay(2)">Wed</button>
-          <button class="day-tab" data-day="3" onclick="selectWeeklyDay(3)">Thu</button>
-          <button class="day-tab" data-day="4" onclick="selectWeeklyDay(4)">Fri</button>
-          <button class="day-tab" data-day="5" onclick="selectWeeklyDay(5)">Sat</button>
-          <button class="day-tab" data-day="6" onclick="selectWeeklyDay(6)">Sun</button>
+        <div class="week-days-grid" id="weekDaysGrid">
+          <button class="day-tab active" data-day="0" onclick="selectWeeklyDay(0)" id="dayTab0">सोम</button>
+          <button class="day-tab" data-day="1" onclick="selectWeeklyDay(1)" id="dayTab1">मंगल</button>
+          <button class="day-tab" data-day="2" onclick="selectWeeklyDay(2)" id="dayTab2">बुध</button>
+          <button class="day-tab" data-day="3" onclick="selectWeeklyDay(3)" id="dayTab3">गुरु</button>
+          <button class="day-tab" data-day="4" onclick="selectWeeklyDay(4)" id="dayTab4">शुक्र</button>
+          <button class="day-tab" data-day="5" onclick="selectWeeklyDay(5)" id="dayTab5">शनि</button>
+          <button class="day-tab" data-day="6" onclick="selectWeeklyDay(6)" id="dayTab6">रवि</button>
         </div>
-        <button class="view-all-week-btn" data-day="-1" onclick="selectWeeklyDay(-1)">
-          📅 View Full Week Plan
+        <button class="view-all-week-btn" data-day="-1" onclick="selectWeeklyDay(-1)" id="viewAllWeekBtn">
+          <span id="viewAllWeekBtnText">📅 पूरे सप्ताह का मेनू देखें</span>
         </button>
       </div>
 
@@ -184,20 +200,22 @@
     <section id="view-history" class="app-view">
       <div class="view-header-clean">
         <div class="view-title-row">
-          <h2>रसोई डायरी (Kitchen Diary)</h2>
-          <button id="clearHistoryBtn" class="btn-clear-selection" onclick="clearCookingHistory()">Clear</button>
+          <h2 id="historyViewTitle">रसोई डायरी</h2>
+          <button id="clearHistoryBtn" class="btn-clear-selection" onclick="clearCookingHistory()">
+            <span id="clearHistoryBtnText">साफ करें</span>
+          </button>
         </div>
-        <p class="view-subtitle">Track confirmed meals by date to avoid repetitive menus.</p>
+        <p class="view-subtitle" id="historyViewSubtitle">बनाए गए व्यंजनों का हिसाब ताकि एक ही खाना बार-बार न बने।</p>
       </div>
 
       <!-- Quick Cooldown & Stats Card -->
       <div class="history-stats-banner">
         <div class="history-stat-box">
           <span class="stat-number" id="historyTotalCount">0</span>
-          <span class="stat-label">Meals Cooked</span>
+          <span class="stat-label" id="historyStatLabel">व्यंजन पकाए</span>
         </div>
         <div class="history-rule-notice">
-          <span>🛡️ <strong>3-Day Anti-Repeat Cooldown:</strong> Confirmed dishes won't reappear in menu shuffles for 3 days!</span>
+          <span id="historyRuleNotice">🛡️ <strong>३-दिन का रिपीट लॉक:</strong> बना हुआ व्यंजन ३ दिन तक मेनू में नहीं आएगा!</span>
         </div>
       </div>
 
@@ -209,83 +227,9 @@
 
     <!-- VIEW 5: ABOUT US, APP GUIDE & LEGAL NOTICE -->
     <section id="view-about" class="app-view">
-      <div class="view-header-clean">
-        <div class="view-title-row">
-          <h2>About Us & Information</h2>
-          <span class="badge-status">v2.4 PWA</span>
-        </div>
-        <p class="view-subtitle">Kya Banaye • Complete App Guide, Philosophy & Legal Notice</p>
+      <div id="aboutViewContainer">
+        <!-- Rendered dynamically via app.js for 100% pure single-language experience -->
       </div>
-
-      <!-- App Philosophy & Features Card -->
-      <div class="info-card-clean">
-        <div class="info-title-row">
-          <span class="info-icon">🍲</span>
-          <h3>Kya Banaye — Shuddh Shakahari</h3>
-        </div>
-        <p><strong>Kya Banaye</strong> is a smart, offline-first Progressive Web App designed specifically for Indian vegetarian households. It ends the daily question <em>"आज क्या बनाएं?"</em> (What should we cook today?) with zero stress and thoughtful variety.</p>
-        
-        <div class="about-highlights-grid">
-          <div class="highlight-item">
-            <span class="hi-icon">🛡️</span>
-            <div>
-              <strong>3-Day Anti-Repeat Cooldown</strong>
-              <p>Whenever you tap "आज बनाया?", that dish is locked out of daily shuffles for 3 days to guarantee variety.</p>
-            </div>
-          </div>
-          <div class="highlight-item">
-            <span class="hi-icon">🌙</span>
-            <div>
-              <strong>Kal Ki Taiyari (Advance Prep)</strong>
-              <p>Nightly reminder at 8:30 PM to soak pulses, set dahi, or prep ingredients, saving 30 minutes in the morning rush.</p>
-            </div>
-          </div>
-          <div class="highlight-item">
-            <span class="hi-icon">📅</span>
-            <div>
-              <strong>Saptahik Bhojan Yojana</strong>
-              <p>A balanced 7-day vegetarian rotation covering high-protein dals, sabzis, and seasonal home favorites.</p>
-            </div>
-          </div>
-          <div class="highlight-item">
-            <span class="hi-icon">📖</span>
-            <div>
-              <strong>Rasoi Diary (Kitchen Diary)</strong>
-              <p>Automatically records what you cooked and when, providing an organized record of household meals.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Creator / Organization Card -->
-      <div class="info-card-clean">
-        <div class="info-title-row">
-          <span class="info-icon">🏢</span>
-          <h3>About Opal Luna Labs</h3>
-        </div>
-        <p><strong>Opal Luna Labs</strong> creates thoughtful software utilities that solve everyday household friction points with minimalism, speed, and empathy. We build privacy-focused, zero-bloat web apps with no ads and no tracking.</p>
-        <p class="copyright-sub">🔒 100% Client-Side Privacy • All data remains saved locally on your device in browser storage.</p>
-      </div>
-
-      <!-- Comprehensive Legal Notice & Medical Disclaimer -->
-      <div class="info-card-clean legal-border">
-        <div class="info-title-row">
-          <span class="info-icon">⚖️</span>
-          <h3>Culinary & Medical Disclaimer</h3>
-        </div>
-        <ul class="legal-list-clean">
-          <li><strong>Purely Advisory:</strong> All meal ideas, recipe guidelines, cooking times, nutritional notes, and advance preparation advice are culinary suggestions for domestic convenience.</li>
-          <li><strong>Zero Legal Liability:</strong> Neither this application nor Opal Luna Labs bears any legal, financial, or medical liability regarding allergic reactions, nutritional deficiencies, or health implications.</li>
-          <li><strong>User Discretion Mandated:</strong> Always inspect ingredient freshness, verify food allergies, and adjust salt, spices, and oil to personal dietary tolerance.</li>
-          <li><strong>Not Medical Advice:</strong> Individuals with chronic medical conditions should consult a certified physician or dietitian before making dietary changes.</li>
-        </ul>
-      </div>
-
-      <!-- Clean Footer -->
-      <footer class="branding-footer-clean">
-        <p><strong>Powered & Developed by Opal Luna Labs</strong></p>
-        <p class="small">© 2026 Opal Luna Labs. All rights reserved.</p>
-      </footer>
     </section>
 
   </main>
@@ -294,60 +238,63 @@
   <div id="recipeModal" class="modal-overlay hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <div>
-          <span class="badge-slot" id="modalMealSlot">BREAKFAST</span>
-          <h3 id="modalDishTitle">Dish Name</h3>
-          <p id="modalDishHindi">Hindi Title</p>
+        <div class="modal-title-col">
+          <span class="badge-slot" id="modalMealSlot">नाश्ता</span>
+          <h3 id="modalDishTitle">व्यंजन का नाम</h3>
         </div>
-        <button id="closeModalBtn" class="close-btn">&times;</button>
+        <button id="closeModalBtn" class="close-btn" aria-label="बंद करें">&times;</button>
       </div>
       <div class="modal-body">
         <div class="modal-info-bar">
-          <span id="modalCookTime">⏱️ 20 mins</span>
-          <span id="modalDifficulty">🟢 Easy</span>
+          <span id="modalCookTime">⏱️ २० मिनट</span>
+          <span id="modalDifficulty">🟢 आसान</span>
         </div>
 
         <!-- Nutritional Highlights Section -->
         <div class="modal-nutrition-block">
           <div class="nutrition-header-row">
-            <span class="nutrition-heading">🥗 पोषण मूल्य (Nutritional Highlights)</span>
-            <span class="nutrition-subtext">Approx. per standard serving</span>
+            <span class="nutrition-heading" id="modalNutriHeading">🥗 पोषण मूल्य</span>
+            <span class="nutrition-subtext" id="modalNutriSubtext">प्रति मानक सर्विंग</span>
           </div>
           <div class="nutrition-pills-row">
             <div class="nutri-stat-card cal-stat">
               <span class="nutri-stat-icon">🔥</span>
               <div class="nutri-stat-data">
                 <span class="nutri-stat-num" id="modalNutriCalories">-- kcal</span>
-                <span class="nutri-stat-name">Calories</span>
+                <span class="nutri-stat-name" id="modalNutriLabelCal">कैलोरी</span>
               </div>
             </div>
             <div class="nutri-stat-card pro-stat">
               <span class="nutri-stat-icon">💪</span>
               <div class="nutri-stat-data">
                 <span class="nutri-stat-num" id="modalNutriProtein">-- g</span>
-                <span class="nutri-stat-name">Protein</span>
+                <span class="nutri-stat-name" id="modalNutriLabelPro">प्रोटीन</span>
               </div>
             </div>
             <div class="nutri-stat-card fib-stat">
               <span class="nutri-stat-icon">🌾</span>
               <div class="nutri-stat-data">
                 <span class="nutri-stat-num" id="modalNutriFiber">-- g</span>
-                <span class="nutri-stat-name">Fiber</span>
+                <span class="nutri-stat-name" id="modalNutriLabelFib">फाइबर</span>
               </div>
             </div>
           </div>
         </div>
 
-        <h4>💡 रसोई सलाह (Cook's Health Advice):</h4>
+        <h4 id="modalHeadingAdvice">💡 रसोई सलाह:</h4>
         <p id="modalAdvice" class="modal-advice-box"></p>
-        <h4>सामग्री (Ingredients):</h4>
+        <h4 id="modalHeadingIngredients">सामग्री:</h4>
         <ul id="modalIngredientsList" class="modal-ing-list"></ul>
-        <h4>सरल और आसान विधि (Step-by-Step Cooking):</h4>
+        <h4 id="modalHeadingSteps">बनाने की सरल विधि:</h4>
         <ol id="modalStepsList" class="modal-steps-list"></ol>
       </div>
       <div class="modal-footer">
-        <button id="shareRecipeModalBtn" class="btn-modal-secondary">📤 Share</button>
-        <button id="closeModalBtn2" class="btn-modal-primary">Done</button>
+        <button id="shareRecipeModalBtn" class="btn-modal-secondary">
+          <span id="modalShareBtnText">📤 शेयर करें</span>
+        </button>
+        <button id="closeModalBtn2" class="btn-modal-primary">
+          <span id="modalCloseBtnText">हो गया</span>
+        </button>
       </div>
     </div>
   </div>
@@ -356,23 +303,23 @@
   <nav class="bottom-nav">
     <button class="nav-tab active" data-tab="today" onclick="switchTab('today')">
       <div class="nav-indicator"><span class="nav-icon">🍲</span></div>
-      <span class="nav-label">मेनू</span>
+      <span class="nav-label" id="navLabelToday">मेनू</span>
     </button>
     <button class="nav-tab" data-tab="prep" onclick="switchTab('prep')">
       <div class="nav-indicator"><span class="nav-icon">🌙</span></div>
-      <span class="nav-label">कल की तैयारी</span>
+      <span class="nav-label" id="navLabelPrep">कल की तैयारी</span>
     </button>
     <button class="nav-tab" data-tab="weekly" onclick="switchTab('weekly')">
       <div class="nav-indicator"><span class="nav-icon">📅</span></div>
-      <span class="nav-label">साप्ताहिक</span>
+      <span class="nav-label" id="navLabelWeekly">साप्ताहिक</span>
     </button>
     <button class="nav-tab" data-tab="history" onclick="switchTab('history')">
       <div class="nav-indicator"><span class="nav-icon">📖</span></div>
-      <span class="nav-label">रसोई डायरी</span>
+      <span class="nav-label" id="navLabelHistory">रसोई डायरी</span>
     </button>
     <button class="nav-tab" data-tab="about" onclick="switchTab('about')">
       <div class="nav-indicator"><span class="nav-icon">ℹ️</span></div>
-      <span class="nav-label">About Us</span>
+      <span class="nav-label" id="navLabelAbout">परिचय</span>
     </button>
   </nav>
 

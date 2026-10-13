@@ -397,19 +397,55 @@ function renderPrepList() {
   if (pctText) pctText.textContent = `${pct}% Ready for Tomorrow`;
   if (barFill) barFill.style.width = `${pct}%`;
 
+  if (state.prepList.length === 0) {
+    container.innerHTML = `
+      <div class="prep-empty-state">
+        <span class="prep-empty-icon">✨</span>
+        <h4>All prep tasks cleared for tonight!</h4>
+        <p>You can add a custom note below or restore standard preparations.</p>
+        <button class="btn-restore-prep" onclick="resetDefaultPrepTasks()">
+          🔄 Restore Default Tasks
+        </button>
+      </div>
+    `;
+    return;
+  }
+
   container.innerHTML = state.prepList.map((item, index) => `
-    <div class="prep-item-clean ${item.isDone ? 'done' : ''}" onclick="togglePrepItem(${index})">
-      <div class="prep-check-bubble ${item.isDone ? 'checked' : ''}">
-        ${item.isDone ? '✓' : ''}
+    <div class="prep-item-clean ${item.isDone ? 'done' : ''}">
+      <div class="prep-item-click-area" onclick="togglePrepItem(${index})">
+        <div class="prep-check-bubble ${item.isDone ? 'checked' : ''}">
+          ${item.isDone ? '✓' : ''}
+        </div>
+        <div class="prep-text-col">
+          <h4 class="prep-item-title">${item.title}</h4>
+          <span class="prep-timing-badge">⏰ ${item.idealTime} • ${item.targetMeal}</span>
+          <p class="prep-item-desc">${item.instructions}</p>
+          <span class="prep-item-why">💡 ${item.whyItMatters}</span>
+        </div>
       </div>
-      <div class="prep-text-col">
-        <h4 class="prep-item-title">${item.title}</h4>
-        <span class="prep-timing-badge">⏰ ${item.idealTime} • ${item.targetMeal}</span>
-        <p class="prep-item-desc">${item.instructions}</p>
-        <span class="prep-item-why">💡 ${item.whyItMatters}</span>
-      </div>
+      <button class="btn-remove-prep-task" onclick="removePrepItem(${index})" title="Remove this task" aria-label="Remove task">
+        ✕
+      </button>
     </div>
   `).join("");
+}
+
+function removePrepItem(index) {
+  if (state.prepList[index]) {
+    const removedTitle = state.prepList[index].title;
+    state.prepList.splice(index, 1);
+    localStorage.setItem("akb_prep_list", JSON.stringify(state.prepList));
+    renderPrepList();
+    showInAppToast("🗑️ Task Removed", `"${removedTitle}" removed from prep list.`);
+  }
+}
+
+function resetDefaultPrepTasks() {
+  state.prepList = DEFAULT_PREP_ITEMS.map(i => ({ ...i, isDone: false }));
+  localStorage.setItem("akb_prep_list", JSON.stringify(state.prepList));
+  renderPrepList();
+  showInAppToast("🔄 Restored", "Default advance preparation tasks restored.");
 }
 
 function togglePrepItem(index) {
@@ -437,6 +473,7 @@ function addCustomPrep() {
   input.value = "";
   localStorage.setItem("akb_prep_list", JSON.stringify(state.prepList));
   renderPrepList();
+  showInAppToast("➕ Task Added", "New reminder added to tonight's prep list.");
 }
 
 // --- 11. PANTRY SOLVER RENDERER ---
@@ -542,11 +579,19 @@ function clearPantry() {
 // --- 12. WEEKLY PLAN RENDERER ---
 function selectWeeklyDay(dayIndex) {
   state.currentWeeklyDay = dayIndex;
-  const tabs = document.querySelectorAll(".week-days-scroll .day-tab");
-  tabs.forEach(t => {
+  const dayTabs = document.querySelectorAll(".week-days-grid .day-tab");
+  const viewAllBtn = document.querySelector(".view-all-week-btn");
+
+  dayTabs.forEach(t => {
     if (parseInt(t.dataset.day, 10) === dayIndex) t.classList.add("active");
     else t.classList.remove("active");
   });
+
+  if (viewAllBtn) {
+    if (dayIndex === -1) viewAllBtn.classList.add("active");
+    else viewAllBtn.classList.remove("active");
+  }
+
   renderWeekly();
 }
 
@@ -704,20 +749,7 @@ function shareWeeklyPlan() {
   }
 }
 
-function orderGrocery(platform) {
-  alert(`Redirecting to ${platform} with Opal Luna Labs affiliate tracking code (ref=opal_luna_labs). You earn 3–7% commission on this weekly basket!`);
-}
 
-function selectPlan(plan) {
-  state.selectedPlan = plan;
-  document.getElementById("planMonthly").classList.toggle("active", plan === "monthly");
-  document.getElementById("planAnnual").classList.toggle("active", plan === "annual");
-
-  const btn = document.getElementById("startTrialBtn");
-  if (btn) {
-    btn.textContent = plan === "annual" ? "Start 7-Day Free Trial (₹999/yr)" : "Start Monthly Membership (₹149/mo)";
-  }
-}
 
 // --- 13. BROWSER PUSH NOTIFICATION SYSTEM (8:30 PM KAL KI TAIYARI) ---
 let notificationTimer = null;
@@ -986,8 +1018,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderTodayMeals();
 
-  // Top buttons
-  document.getElementById("aboutTopBtn")?.addEventListener("click", () => switchTab("about"));
+  // Main actions
   document.getElementById("replanAllBtn")?.addEventListener("click", replanAll);
   document.getElementById("clearPantryBtn")?.addEventListener("click", clearPantry);
   document.getElementById("addCustomPrepBtn")?.addEventListener("click", addCustomPrep);
@@ -1050,11 +1081,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Schedule notification on startup
   schedule830PMNotification();
-
-  // Subscription action
-  document.getElementById("startTrialBtn")?.addEventListener("click", () => {
-    alert("Opal Rasoi Pro subscription checkout simulated! Thank you for supporting Opal Luna Labs.");
-  });
 
   // Register Service Worker for PWA
   if ("serviceWorker" in navigator) {

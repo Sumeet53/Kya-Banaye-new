@@ -615,13 +615,14 @@ function renderMealCard(slotKey, meal, containerId) {
   `;
 }
 
-function saveCurrentDailyPlan() {
+function saveCurrentDailyPlan(isUserCustomized = false) {
   const todayStr = getTodayDateString();
   const planData = {
     date: todayStr,
     bfIndex: state.currentBfIndex,
     lnIndex: state.currentLnIndex,
-    dnIndex: state.currentDnIndex
+    dnIndex: state.currentDnIndex,
+    isUserCustomized: !!isUserCustomized
   };
   localStorage.setItem("akb_daily_plan", JSON.stringify(planData));
 }
@@ -648,8 +649,8 @@ function initDailyMealPlan() {
     savedPlan = null;
   }
 
-  // If a plan was already generated or customized for TODAY, use it
-  if (savedPlan && savedPlan.date === todayStr &&
+  // If the user already customized (swapped/shuffled) meals TODAY, respect their customized choice:
+  if (savedPlan && savedPlan.date === todayStr && savedPlan.isUserCustomized &&
       typeof savedPlan.bfIndex === "number" &&
       typeof savedPlan.lnIndex === "number" &&
       typeof savedPlan.dnIndex === "number") {
@@ -660,16 +661,20 @@ function initDailyMealPlan() {
     return;
   }
 
-  // Otherwise, it is a NEW DAY! Generate brand new distinctive recommendations for today:
+  // Otherwise, Today's Menu syncs 100% with the curated WEEKLY_PLAN for today's day of week!
+  // (e.g. Wednesday in Today's Menu matches Wednesday in Weekly Plan exactly)
   const [y, m, d] = todayStr.split("-").map(Number);
-  const dayNum = Math.floor(new Date(y, m - 1, d).getTime() / 86400000);
+  const dateObj = new Date(y, m - 1, d);
+  const jsDay = dateObj.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+  const weeklyDayIndex = (jsDay + 6) % 7; // 0 = Mon, 1 = Tue, 2 = Wed, ..., 6 = Sun
 
-  // Coprime formula guarantees each slot cycles through a fresh dish every single day
-  let bf = ((dayNum * 3 + 2) % 10 + 10) % 10;
-  let ln = ((dayNum * 7 + 5) % 10 + 10) % 10;
-  let dn = ((dayNum * 9 + 8) % 10 + 10) % 10;
+  const daySchedule = WEEKLY_PLAN[weeklyDayIndex] || WEEKLY_PLAN[0];
 
-  // Protect against repeat dishes using 3-Day Anti-Repeat Cooldown from Kitchen Diary
+  let bf = daySchedule.bf % MEAL_DATABASE.breakfast.length;
+  let ln = daySchedule.ln % MEAL_DATABASE.lunch.length;
+  let dn = daySchedule.dn % MEAL_DATABASE.dinner.length;
+
+  // Protect against repeat dishes using 3-Day Anti-Repeat Cooldown if cooked recently
   bf = ensureNotInCooldown("breakfast", bf);
   ln = ensureNotInCooldown("lunch", ln);
   dn = ensureNotInCooldown("dinner", dn);
@@ -679,7 +684,7 @@ function initDailyMealPlan() {
   state.currentDnIndex = dn;
   state.currentPlanDate = todayStr;
 
-  saveCurrentDailyPlan();
+  saveCurrentDailyPlan(false);
 }
 
 function renderTodayMeals() {
@@ -809,7 +814,7 @@ function swapMeal(slotKey) {
   if (slotKey === "dinner") {
     state.currentDnIndex = getNonRepeatedMealIndex("dinner", state.currentDnIndex % MEAL_DATABASE.dinner.length);
   }
-  saveCurrentDailyPlan();
+  saveCurrentDailyPlan(true);
   renderTodayMeals();
 }
 
@@ -817,7 +822,7 @@ function replanAll() {
   state.currentBfIndex = getNonRepeatedMealIndex("breakfast", state.currentBfIndex % MEAL_DATABASE.breakfast.length);
   state.currentLnIndex = getNonRepeatedMealIndex("lunch", state.currentLnIndex % MEAL_DATABASE.lunch.length);
   state.currentDnIndex = getNonRepeatedMealIndex("dinner", state.currentDnIndex % MEAL_DATABASE.dinner.length);
-  saveCurrentDailyPlan();
+  saveCurrentDailyPlan(true);
   renderTodayMeals();
   showInAppToast(t("toastReplan"), t("toastReplanDesc"));
 }
@@ -960,6 +965,7 @@ function renderWeekly() {
   if (!container) return;
 
   const lang = state.lang;
+  const todayWeeklyIdx = (new Date().getDay() + 6) % 7;
   const daysToRender = state.currentWeeklyDay === -1 
     ? WEEKLY_PLAN.map((d, i) => ({ ...d, originalIdx: i }))
     : [ { ...WEEKLY_PLAN[state.currentWeeklyDay], originalIdx: state.currentWeeklyDay } ];
@@ -976,13 +982,17 @@ function renderWeekly() {
     const bfTitle = lang === "hi" ? bf.hindiTitle : bf.name;
     const lnTitle = lang === "hi" ? ln.hindiTitle : ln.name;
     const dnTitle = lang === "hi" ? dn.hindiTitle : dn.name;
+    const isToday = (day.originalIdx === todayWeeklyIdx);
 
     return `
-      <div class="day-plan-card-clean">
+      <div class="day-plan-card-clean ${isToday ? 'today-plan-card' : ''}">
         <div class="day-header-clean">
-          <div>
-            <span class="day-title">${dayTitle}</span>
-            <span class="day-hindi">(${dayTheme})</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <div>
+              <span class="day-title">${dayTitle}</span>
+              <span class="day-hindi">(${dayTheme})</span>
+            </div>
+            ${isToday ? `<span class="badge-status" style="background:#DCFCE7; color:#15803D; border-color:#86EFAC;">${lang === 'hi' ? '🌟 आज' : '🌟 Today'}</span>` : ''}
           </div>
         </div>
 

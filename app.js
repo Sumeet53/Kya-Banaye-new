@@ -40,9 +40,12 @@ const I18N = {
     doneSuffix: "पूर्ण",
     readinessLabel: "रसोई की तैयारी स्थिति",
     readySuffix: "तैयार",
-    reminderTitle: "८:३० बजे रात का रिमाइंडर",
-    reminderDescOn: "दाल भिगोने और दही जमाने के लिए रोज़ाना सूचना सक्रिय।",
+    reminderTitle: "रात ८:३० बजे कल की तैयारी",
+    reminderDescOn: "दाल भिगोने और दही जमाने के लिए रोज़ाना रात ८:३० बजे सूचना सक्रिय।",
     reminderDescOff: "रिमाइंडर बंद है। सक्रिय करने के लिए टॉगल चालू करें।",
+    morningReminderTitle: "सुबह ७:०० बजे मेनू रिमाइंडर",
+    morningReminderDescOn: "आज का ताज़ा नाश्ता और भोजन तय करने के लिए रोज़ाना सुबह ७:०० बजे सूचना।",
+    morningReminderDescOff: "सुबह का रिमाइंडर बंद है। सुबह ७:०० बजे मेनू सूचना के लिए टॉगल ऑन करें।",
     testAlert: "जांचें",
     tonightTasks: "आज रात के कार्य",
     prepCleared: "आज रात के सभी कार्य पूरे हो चुके हैं!",
@@ -124,9 +127,12 @@ const I18N = {
     doneSuffix: "Done",
     readinessLabel: "Tonight's Kitchen Readiness",
     readySuffix: "Ready",
-    reminderTitle: "8:30 PM Nightly Reminder",
+    reminderTitle: "8:30 PM Nightly Prep Reminder",
     reminderDescOn: "Daily chime active at 8:30 PM to soak pulses & set dahi for tomorrow.",
     reminderDescOff: "Reminder paused. Tap toggle to activate daily 8:30 PM reminders.",
+    morningReminderTitle: "7:00 AM Morning Menu Reminder",
+    morningReminderDescOn: "Daily 7:00 AM alert with today's fresh breakfast & lunch recommendation.",
+    morningReminderDescOff: "Morning reminder paused. Toggle on for daily 7:00 AM meal alerts.",
     testAlert: "Test Alert",
     tonightTasks: "Tonight's Tasks",
     prepCleared: "All prep tasks cleared for tonight!",
@@ -181,7 +187,7 @@ let state = {
   lang: localStorage.getItem("akb_lang") || "hi", // Default Hindi
   activeTab: "today",
   currentMealFilter: "all",
-  currentWeeklyDay: -1,
+  currentWeeklyDay: (new Date().getDay() + 6) % 7,
   currentPlanDate: null,
   currentBfIndex: 0,
   currentLnIndex: 0,
@@ -261,6 +267,9 @@ function applyStaticLanguageStrings() {
   const prepTitle = document.getElementById("prepViewTitle");
   const prepSub = document.getElementById("prepViewSubtitle");
   const readinessLabel = document.getElementById("prepReadinessLabel");
+  const morningRemTitle = document.getElementById("morningReminderCardTitle");
+  const morningRemDesc = document.getElementById("morningReminderStatusDesc");
+  const morningTestAlertText = document.getElementById("testMorningAlertBtnText");
   const remTitle = document.getElementById("reminderCardTitle");
   const remDesc = document.getElementById("reminderStatusDesc");
   const testAlertText = document.getElementById("testAlertBtnText");
@@ -271,6 +280,34 @@ function applyStaticLanguageStrings() {
   if (prepTitle) prepTitle.textContent = t("prepViewTitle");
   if (prepSub) prepSub.textContent = t("prepSubtitle");
   if (readinessLabel) readinessLabel.textContent = t("readinessLabel");
+  const morningTimeSetting = localStorage.getItem("akb_morning_time") || "07:00";
+  const morningTimeLabel = lang === "hi" 
+    ? (morningTimeSetting === "06:00" ? "६:०० AM" : "७:०० AM") 
+    : (morningTimeSetting === "06:00" ? "6:00 AM" : "7:00 AM");
+
+  if (morningRemTitle) {
+    morningRemTitle.textContent = lang === "hi" 
+      ? `सुबह ${morningTimeLabel} मेनू रिमाइंडर` 
+      : `${morningTimeLabel} Morning Menu Reminder`;
+  }
+  if (morningRemDesc) {
+    const morningEnabled = localStorage.getItem("akb_morning_reminder_enabled") !== "false";
+    if (morningEnabled) {
+      morningRemDesc.textContent = lang === "hi" 
+        ? `आज का ताज़ा नाश्ता और भोजन तय करने के लिए रोज़ाना सुबह ${morningTimeLabel} पर सूचना।` 
+        : `Daily ${morningTimeLabel} alert with today's fresh breakfast & meal recommendations.`;
+    } else {
+      morningRemDesc.textContent = lang === "hi" ? t("morningReminderDescOff") : t("morningReminderDescOff");
+    }
+  }
+  if (morningTestAlertText) morningTestAlertText.textContent = t("testAlert");
+
+  const chip6 = document.getElementById("morningTimeChip6");
+  const chip7 = document.getElementById("morningTimeChip7");
+  const timePickerLabel = document.getElementById("morningTimePickerLabel");
+  if (chip6) chip6.textContent = lang === "hi" ? "६:०० AM" : "6:00 AM";
+  if (chip7) chip7.textContent = lang === "hi" ? "७:०० AM" : "7:00 AM";
+  if (timePickerLabel) timePickerLabel.textContent = lang === "hi" ? "समय:" : "Time:";
   if (remTitle) remTitle.textContent = t("reminderTitle");
   if (remDesc) {
     const enabled = localStorage.getItem("akb_reminder_enabled") !== "false";
@@ -362,7 +399,10 @@ function switchTab(tabId) {
 
   if (tabId === "today") renderTodayMeals();
   if (tabId === "prep") renderPrepList();
-  if (tabId === "weekly") renderWeekly();
+  if (tabId === "weekly") {
+    const todayWeeklyIdx = (new Date().getDay() + 6) % 7;
+    selectWeeklyDay(todayWeeklyIdx);
+  }
   if (tabId === "history") renderCookingHistory();
   if (tabId === "about") renderAbout();
 }
@@ -946,10 +986,15 @@ function selectWeeklyDay(dayIndex) {
   state.currentWeeklyDay = dayIndex;
   const dayTabs = document.querySelectorAll(".week-days-grid .day-tab");
   const viewAllBtn = document.querySelector(".view-all-week-btn");
+  const todayWeeklyIdx = (new Date().getDay() + 6) % 7;
 
   dayTabs.forEach(t => {
-    if (parseInt(t.dataset.day, 10) === dayIndex) t.classList.add("active");
+    const d = parseInt(t.dataset.day, 10);
+    if (d === dayIndex) t.classList.add("active");
     else t.classList.remove("active");
+
+    if (d === todayWeeklyIdx) t.classList.add("is-today-tab");
+    else t.classList.remove("is-today-tab");
   });
 
   if (viewAllBtn) {
@@ -971,9 +1016,18 @@ function renderWeekly() {
     : [ { ...WEEKLY_PLAN[state.currentWeeklyDay], originalIdx: state.currentWeeklyDay } ];
 
   container.innerHTML = daysToRender.map(day => {
-    const bf = MEAL_DATABASE.breakfast[day.bf % MEAL_DATABASE.breakfast.length];
-    const ln = MEAL_DATABASE.lunch[day.ln % MEAL_DATABASE.lunch.length];
-    const dn = MEAL_DATABASE.dinner[day.dn % MEAL_DATABASE.dinner.length];
+    const isToday = (day.originalIdx === todayWeeklyIdx);
+
+    // If day is today, sync with today's active menu recommendation (including any customization)
+    let bf = MEAL_DATABASE.breakfast[day.bf % MEAL_DATABASE.breakfast.length];
+    let ln = MEAL_DATABASE.lunch[day.ln % MEAL_DATABASE.lunch.length];
+    let dn = MEAL_DATABASE.dinner[day.dn % MEAL_DATABASE.dinner.length];
+
+    if (isToday && typeof state.currentBfIndex === "number" && typeof state.currentLnIndex === "number" && typeof state.currentDnIndex === "number") {
+      bf = MEAL_DATABASE.breakfast[state.currentBfIndex % MEAL_DATABASE.breakfast.length] || bf;
+      ln = MEAL_DATABASE.lunch[state.currentLnIndex % MEAL_DATABASE.lunch.length] || ln;
+      dn = MEAL_DATABASE.dinner[state.currentDnIndex % MEAL_DATABASE.dinner.length] || dn;
+    }
 
     const dayTitle = lang === "hi" ? day.dayHi : day.day;
     const dayTheme = lang === "hi" ? day.themeHi : day.themeEn;
@@ -982,7 +1036,6 @@ function renderWeekly() {
     const bfTitle = lang === "hi" ? bf.hindiTitle : bf.name;
     const lnTitle = lang === "hi" ? ln.hindiTitle : ln.name;
     const dnTitle = lang === "hi" ? dn.hindiTitle : dn.name;
-    const isToday = (day.originalIdx === todayWeeklyIdx);
 
     return `
       <div class="day-plan-card-clean ${isToday ? 'today-plan-card' : ''}">
@@ -992,7 +1045,7 @@ function renderWeekly() {
               <span class="day-title">${dayTitle}</span>
               <span class="day-hindi">(${dayTheme})</span>
             </div>
-            ${isToday ? `<span class="badge-status" style="background:#DCFCE7; color:#15803D; border-color:#86EFAC;">${lang === 'hi' ? '🌟 आज' : '🌟 Today'}</span>` : ''}
+            ${isToday ? `<span class="badge-status" style="background:#DCFCE7; color:#15803D; border-color:#86EFAC; font-weight:700;">${lang === 'hi' ? '🌟 आज का मेनू' : '🌟 Today\'s Menu'}</span>` : ''}
           </div>
         </div>
 
@@ -1281,6 +1334,177 @@ function schedule830PMNotification() {
   }, msUntilNext);
 
   notificationInterval = setInterval(checkAndNotify, 30000);
+}
+
+// --- 13.5 MORNING 6:00 / 7:00 AM NOTIFICATION SYSTEM ---
+const MORNING_NOTIF_PHRASES = [
+  {
+    hiTitle: "🌅 शुभ प्रभात! आज क्या बनाएं?",
+    hiBody: "आज का स्वादिष्ट नाश्ता, लंच और डिनर मेनू तैयार है — अभी अपनी रसोई योजना देखें!",
+    enTitle: "🌅 Good Morning! Wondering Kya Banaye today?",
+    enBody: "Your fresh, balanced breakfast, lunch & dinner plan is ready — check it now!"
+  },
+  {
+    hiTitle: "☀️ आज की रसोई आसान बनाएं!",
+    hiBody: "सुबह का ताज़ा नाश्ता और दिन का संतुलित आहार प्लान तैयार है। एक नज़र डालें!",
+    enTitle: "☀️ Stress-Free Cooking Today!",
+    enBody: "Today's healthy morning meal and daily nutrition plan are ready for your kitchen."
+  },
+  {
+    hiTitle: "🍳 ताज़ा नाश्ता और पौष्टिक खाना!",
+    hiBody: "देखें आज आपके परिवार के लिए क्या खास और संतुलित मेनू चुना गया है।",
+    enTitle: "🍳 Nutritious & Delicious Meals!",
+    enBody: "Tap to see today's curated pure vegetarian recommendations and quick prep tips."
+  },
+  {
+    hiTitle: "🌿 अच्छी सेहत की शुरुआत एक अच्छे भोजन से!",
+    hiBody: "आज का ताज़ा मेनू चक्र तैयार है। दाल, हरी सब्ज़ी और संपूर्ण पोषण से भरपूर!",
+    enTitle: "🌿 Healthy Day Ahead!",
+    enBody: "Today's wholesome meal rotation is set. Take a quick look before stepping into the kitchen!"
+  },
+  {
+    hiTitle: "✨ आज रसोई में क्या बन रहा है?",
+    hiBody: "नाश्ते से रात के खाने तक की पूरी योजना तैयार है। झटपट खोलें और तनावमुक्त बनाएं!",
+    enTitle: "✨ What's Cooking Today?",
+    enBody: "Complete morning-to-night home-cooked menu is ready. Tap to view today's dishes!"
+  }
+];
+
+let morningNotificationTimer = null;
+let morningNotificationInterval = null;
+
+function getMorningReminderTime() {
+  return localStorage.getItem("akb_morning_time") || "07:00";
+}
+
+function setMorningReminderTime(timeStr) {
+  localStorage.setItem("akb_morning_time", timeStr);
+  
+  // Update chips UI
+  document.querySelectorAll(".morning-time-chip").forEach(chip => {
+    if (chip.dataset.time === timeStr) chip.classList.add("active");
+    else chip.classList.remove("active");
+  });
+
+  // Update header text in static strings
+  applyStaticLanguageStrings();
+
+  // Reschedule timer
+  scheduleMorningNotification();
+
+  const formattedTime = timeStr === "06:00" ? "6:00 AM" : "7:00 AM";
+  const toastMsg = state.lang === "hi" 
+    ? `सुबह का रिमाइंडर अब ${timeStr === '06:00' ? '६:०० AM' : '७:०० AM'} पर सेट किया गया है।`
+    : `Morning reminder set for ${formattedTime}.`;
+  showInAppToast("☀️ " + (state.lang === "hi" ? "समय अपडेट" : "Time Updated"), toastMsg);
+}
+
+function triggerMorningReminder(isTest = false) {
+  playGentleChime();
+  const lang = state.lang;
+  const timeSetting = getMorningReminderTime();
+  const timeLabel = lang === "hi" 
+    ? (timeSetting === "06:00" ? "६:०० AM" : "७:०० AM") 
+    : (timeSetting === "06:00" ? "6:00 AM" : "7:00 AM");
+
+  // Pick a random nice and helpful phrase
+  const phrase = MORNING_NOTIF_PHRASES[Math.floor(Math.random() * MORNING_NOTIF_PHRASES.length)];
+  const title = isTest 
+    ? (lang === "hi" ? `🔔 जांच सूचना: सुबह ${timeLabel} मेनू रिमाइंडर` : `🔔 Test Alert: ${timeLabel} Morning Menu Reminder`)
+    : (lang === "hi" ? phrase.hiTitle : phrase.enTitle);
+  const body = isTest 
+    ? (lang === "hi" ? `जांच सफल! रोज़ाना सुबह ${timeLabel} आपको आज का ताज़ा नाश्ता व भोजन तय करने की याद दिलाई जाएगी।` : `Test successful! Every morning at ${timeLabel}, you'll receive a friendly reminder to check today's meals.`)
+    : (lang === "hi" ? phrase.hiBody : phrase.enBody);
+
+  showInAppToast(title, body);
+
+  if ("Notification" in window && Notification.permission === "granted") {
+    const notifOptions = {
+      body: body,
+      icon: "icon-192.png",
+      badge: "icon-192.png",
+      tag: "morning-menu-reminder",
+      renotify: true,
+      silent: false
+    };
+
+    if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.ready.then(reg => {
+        reg.showNotification(title, notifOptions);
+      }).catch(() => {
+        try { new Notification(title, notifOptions); } catch (e) {}
+      });
+    } else {
+      try { new Notification(title, notifOptions); } catch (e) {}
+    }
+  }
+
+  if (!isTest) {
+    localStorage.setItem("akb_last_morning_notified_date", new Date().toDateString());
+  }
+}
+
+function scheduleMorningNotification() {
+  if (morningNotificationTimer) clearTimeout(morningNotificationTimer);
+  if (morningNotificationInterval) clearInterval(morningNotificationInterval);
+
+  const enabled = localStorage.getItem("akb_morning_reminder_enabled") !== "false";
+  const toggle = document.getElementById("morningReminderToggle");
+  if (toggle) toggle.checked = enabled;
+
+  const timeSetting = getMorningReminderTime();
+  const [targetHour, targetMinute] = timeSetting.split(":").map(Number);
+
+  // Update time chips in UI
+  document.querySelectorAll(".morning-time-chip").forEach(chip => {
+    if (chip.dataset.time === timeSetting) chip.classList.add("active");
+    else chip.classList.remove("active");
+  });
+
+  const desc = document.getElementById("morningReminderStatusDesc");
+  if (desc) {
+    const timeLabel = state.lang === "hi" 
+      ? (timeSetting === "06:00" ? "६:०० AM" : "७:०० AM") 
+      : (timeSetting === "06:00" ? "6:00 AM" : "7:00 AM");
+    if (enabled) {
+      desc.textContent = state.lang === "hi" 
+        ? `आज का ताज़ा नाश्ता और भोजन तय करने के लिए रोज़ाना सुबह ${timeLabel} पर सूचना।` 
+        : `Daily ${timeLabel} alert with today's fresh breakfast & meal recommendations.`;
+    } else {
+      desc.textContent = state.lang === "hi" 
+        ? "सुबह का रिमाइंडर बंद है। सूचना के लिए टॉगल ऑन करें।" 
+        : "Morning reminder paused. Toggle on for daily meal alerts.";
+    }
+  }
+
+  if (!enabled) return;
+
+  function checkAndNotifyMorning() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const todayStr = now.toDateString();
+    const lastNotified = localStorage.getItem("akb_last_morning_notified_date");
+
+    if ((hours > targetHour || (hours === targetHour && minutes >= targetMinute)) && lastNotified !== todayStr) {
+      triggerMorningReminder(false);
+    }
+  }
+
+  const now = new Date();
+  const nextTarget = new Date();
+  nextTarget.setHours(targetHour, targetMinute, 0, 0);
+  if (now.getTime() >= nextTarget.getTime()) {
+    nextTarget.setDate(nextTarget.getDate() + 1);
+  }
+  const msUntilNext = nextTarget.getTime() - now.getTime();
+
+  morningNotificationTimer = setTimeout(() => {
+    checkAndNotifyMorning();
+    scheduleMorningNotification();
+  }, msUntilNext);
+
+  morningNotificationInterval = setInterval(checkAndNotifyMorning, 30000);
 }
 
 // --- 14. KITCHEN DIARY (रसोई डायरी) RENDERER ---
@@ -1575,7 +1799,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render initial views
   renderTodayMeals();
   renderPrepList();
-  renderWeekly();
+  
+  // Highlight and select current day in weekly plan by default
+  const todayWeeklyIdx = (new Date().getDay() + 6) % 7;
+  selectWeeklyDay(todayWeeklyIdx);
+
   renderCookingHistory();
   renderAbout();
 
@@ -1594,7 +1822,42 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.id === "recipeModal") closeModal();
   });
 
-  // Reminder toggle & push notification setup
+  // Morning 6:00 / 7:00 AM Reminder toggle & push notification setup
+  const morningReminderToggle = document.getElementById("morningReminderToggle");
+  morningReminderToggle?.addEventListener("change", (e) => {
+    const isChecked = e.target.checked;
+    localStorage.setItem("akb_morning_reminder_enabled", isChecked ? "true" : "false");
+    scheduleMorningNotification();
+
+    if (isChecked) {
+      if ("Notification" in window && Notification.permission === "default") {
+        Notification.requestPermission().then((perm) => {
+          if (perm === "granted") {
+            scheduleMorningNotification();
+            showInAppToast("☀️ " + (state.lang === "hi" ? "सुबह का रिमाइंडर सक्रिय" : "Morning Reminder Active"), 
+              state.lang === "hi" ? "रोज़ाना सुबह मेनू रिमाइंडर सक्रिय हो गया है।" : "Daily morning meal reminders are active.");
+          }
+        });
+      } else {
+        showInAppToast("☀️ " + (state.lang === "hi" ? "सुबह का रिमाइंडर सक्रिय" : "Morning Reminder Active"),
+          state.lang === "hi" ? "रोज़ाना सुबह मेनू रिमाइंडर सक्रिय हो गया है।" : "Daily morning meal reminders are active.");
+      }
+    } else {
+      showInAppToast("🔕 " + (state.lang === "hi" ? "रिमाइंडर बंद" : "Reminder Paused"),
+        state.lang === "hi" ? "सुबह का रिमाइंडर रोक दिया गया है।" : "Morning reminder paused.");
+    }
+  });
+
+  // Test Morning Notification Button
+  document.getElementById("testMorningNotificationBtn")?.addEventListener("click", () => {
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission().then(() => triggerMorningReminder(true));
+    } else {
+      triggerMorningReminder(true);
+    }
+  });
+
+  // Nightly 8:30 PM Reminder toggle & push notification setup
   const reminderToggle = document.getElementById("prepReminderToggle");
   reminderToggle?.addEventListener("change", (e) => {
     const isChecked = e.target.checked;
@@ -1617,7 +1880,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Test Notification Button
+  // Test Nightly Notification Button
   document.getElementById("testNotificationBtn")?.addEventListener("click", () => {
     if ("Notification" in window && Notification.permission === "default") {
       Notification.requestPermission().then(() => trigger830PMReminder(true));
@@ -1626,7 +1889,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Schedule notification on startup
+  // Schedule notifications on startup
+  scheduleMorningNotification();
   schedule830PMNotification();
 
   // Register Service Worker for PWA

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aaj-kya-banega-v5';
+const CACHE_NAME = 'aaj-kya-banega-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -38,6 +38,7 @@ self.addEventListener('fetch', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
+  const isMorning = event.notification.tag === 'morning-menu-reminder';
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
       for (const client of clientList) {
@@ -46,7 +47,7 @@ self.addEventListener('notificationclick', (event) => {
         }
       }
       if (clients.openWindow) {
-        return clients.openWindow('./#prep');
+        return clients.openWindow(isMorning ? './#today' : './#prep');
       }
     })
   );

@@ -124,12 +124,37 @@
         </div>
       </div>
 
+      <!-- Morning 6:00 / 7:00 AM Menu Reminder Card -->
+      <div class="reminder-card-clean morning-reminder-card">
+        <div class="reminder-info">
+          <span class="reminder-icon">☀️</span>
+          <div class="reminder-text-col">
+            <h4 id="morningReminderCardTitle">सुबह ७:०० बजे मेनू रिमाइंडर</h4>
+            <p id="morningReminderStatusDesc">आज का ताज़ा नाश्ता और भोजन तय करने के लिए रोज़ाना सुबह सूचना।</p>
+            <div class="morning-time-picker-row">
+              <span class="morning-time-label" id="morningTimePickerLabel">समय / Time:</span>
+              <button class="morning-time-chip" data-time="06:00" onclick="setMorningReminderTime('06:00')" id="morningTimeChip6">६:०० AM</button>
+              <button class="morning-time-chip active" data-time="07:00" onclick="setMorningReminderTime('07:00')" id="morningTimeChip7">७:०० AM</button>
+            </div>
+          </div>
+        </div>
+        <div class="reminder-controls">
+          <button id="testMorningNotificationBtn" class="btn-test-alert morning-btn" title="सुबह की सूचना जांचें">
+            <span id="testMorningAlertBtnText">जांचें</span>
+          </button>
+          <label class="switch" title="सुबह का रिमाइंडर ऑन/ऑफ करें">
+            <input type="checkbox" id="morningReminderToggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+
       <!-- Sleek 8:30 PM Nightly Reminder Card -->
       <div class="reminder-card-clean">
         <div class="reminder-info">
-          <span class="reminder-icon">🔔</span>
+          <span class="reminder-icon">🌙</span>
           <div class="reminder-text-col">
-            <h4 id="reminderCardTitle">८:३० बजे रात का रिमाइंडर</h4>
+            <h4 id="reminderCardTitle">रात ८:३० बजे कल की तैयारी</h4>
             <p id="reminderStatusDesc">दाल भिगोने और दही जमाने के लिए रोज़ाना सूचना।</p>
           </div>
         </div>
@@ -178,7 +203,7 @@
       <!-- Week Day Selector (7-Day Grid + Full Width View All) -->
       <div class="week-selector-container">
         <div class="week-days-grid" id="weekDaysGrid">
-          <button class="day-tab active" data-day="0" onclick="selectWeeklyDay(0)" id="dayTab0">सोम</button>
+          <button class="day-tab" data-day="0" onclick="selectWeeklyDay(0)" id="dayTab0">सोम</button>
           <button class="day-tab" data-day="1" onclick="selectWeeklyDay(1)" id="dayTab1">मंगल</button>
           <button class="day-tab" data-day="2" onclick="selectWeeklyDay(2)" id="dayTab2">बुध</button>
           <button class="day-tab" data-day="3" onclick="selectWeeklyDay(3)" id="dayTab3">गुरु</button>

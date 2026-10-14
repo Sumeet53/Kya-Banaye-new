@@ -182,6 +182,7 @@ let state = {
   activeTab: "today",
   currentMealFilter: "all",
   currentWeeklyDay: -1,
+  currentPlanDate: null,
   currentBfIndex: 0,
   currentLnIndex: 0,
   currentDnIndex: 0,
@@ -614,7 +615,78 @@ function renderMealCard(slotKey, meal, containerId) {
   `;
 }
 
+function saveCurrentDailyPlan() {
+  const todayStr = getTodayDateString();
+  const planData = {
+    date: todayStr,
+    bfIndex: state.currentBfIndex,
+    lnIndex: state.currentLnIndex,
+    dnIndex: state.currentDnIndex
+  };
+  localStorage.setItem("akb_daily_plan", JSON.stringify(planData));
+}
+
+function ensureNotInCooldown(slotKey, initialIndex) {
+  const list = MEAL_DATABASE[slotKey];
+  if (!list || list.length === 0) return 0;
+  for (let step = 0; step < list.length; step++) {
+    const idx = (initialIndex + step) % list.length;
+    if (!isMealInCooldown(list[idx].id, 3)) {
+      return idx;
+    }
+  }
+  return initialIndex;
+}
+
+function initDailyMealPlan() {
+  const todayStr = getTodayDateString();
+  let savedPlan = null;
+  try {
+    const raw = localStorage.getItem("akb_daily_plan");
+    if (raw) savedPlan = JSON.parse(raw);
+  } catch (e) {
+    savedPlan = null;
+  }
+
+  // If a plan was already generated or customized for TODAY, use it
+  if (savedPlan && savedPlan.date === todayStr &&
+      typeof savedPlan.bfIndex === "number" &&
+      typeof savedPlan.lnIndex === "number" &&
+      typeof savedPlan.dnIndex === "number") {
+    state.currentBfIndex = savedPlan.bfIndex;
+    state.currentLnIndex = savedPlan.lnIndex;
+    state.currentDnIndex = savedPlan.dnIndex;
+    state.currentPlanDate = todayStr;
+    return;
+  }
+
+  // Otherwise, it is a NEW DAY! Generate brand new distinctive recommendations for today:
+  const [y, m, d] = todayStr.split("-").map(Number);
+  const dayNum = Math.floor(new Date(y, m - 1, d).getTime() / 86400000);
+
+  // Coprime formula guarantees each slot cycles through a fresh dish every single day
+  let bf = ((dayNum * 3 + 2) % 10 + 10) % 10;
+  let ln = ((dayNum * 7 + 5) % 10 + 10) % 10;
+  let dn = ((dayNum * 9 + 8) % 10 + 10) % 10;
+
+  // Protect against repeat dishes using 3-Day Anti-Repeat Cooldown from Kitchen Diary
+  bf = ensureNotInCooldown("breakfast", bf);
+  ln = ensureNotInCooldown("lunch", ln);
+  dn = ensureNotInCooldown("dinner", dn);
+
+  state.currentBfIndex = bf;
+  state.currentLnIndex = ln;
+  state.currentDnIndex = dn;
+  state.currentPlanDate = todayStr;
+
+  saveCurrentDailyPlan();
+}
+
 function renderTodayMeals() {
+  const todayStr = getTodayDateString();
+  if (state.currentPlanDate !== todayStr) {
+    initDailyMealPlan();
+  }
   updateDateBanner();
   const bf = MEAL_DATABASE.breakfast[state.currentBfIndex % MEAL_DATABASE.breakfast.length];
   const ln = MEAL_DATABASE.lunch[state.currentLnIndex % MEAL_DATABASE.lunch.length];
@@ -737,6 +809,7 @@ function swapMeal(slotKey) {
   if (slotKey === "dinner") {
     state.currentDnIndex = getNonRepeatedMealIndex("dinner", state.currentDnIndex % MEAL_DATABASE.dinner.length);
   }
+  saveCurrentDailyPlan();
   renderTodayMeals();
 }
 
@@ -744,6 +817,7 @@ function replanAll() {
   state.currentBfIndex = getNonRepeatedMealIndex("breakfast", state.currentBfIndex % MEAL_DATABASE.breakfast.length);
   state.currentLnIndex = getNonRepeatedMealIndex("lunch", state.currentLnIndex % MEAL_DATABASE.lunch.length);
   state.currentDnIndex = getNonRepeatedMealIndex("dinner", state.currentDnIndex % MEAL_DATABASE.dinner.length);
+  saveCurrentDailyPlan();
   renderTodayMeals();
   showInAppToast(t("toastReplan"), t("toastReplanDesc"));
 }
@@ -1235,10 +1309,24 @@ function renderCookingHistory() {
     dinner: { label: t("slotDn"), cls: "dinner" }
   };
 
+  const slotOrder = {
+    breakfast: 1,
+    lunch: 2,
+    dinner: 3
+  };
+
   container.innerHTML = sortedDates.map(dateKey => {
     const isToday = dateKey === todayStr;
     const items = groups[dateKey];
     const formatted = getFormattedDate(dateKey);
+
+    // Strictly sort items for each day in order: Breakfast -> Lunch -> Dinner!
+    const sortedDayItems = [...items].sort((a, b) => {
+      const orderA = slotOrder[a.slot] || 99;
+      const orderB = slotOrder[b.slot] || 99;
+      if (orderA !== orderB) return orderA - orderB;
+      return (a.timestamp || 0) - (b.timestamp || 0);
+    });
 
     return `
       <div class="history-date-group">
@@ -1249,7 +1337,7 @@ function renderCookingHistory() {
           </span>
         </div>
         <div class="history-meal-list">
-          ${items.map(item => {
+          ${sortedDayItems.map(item => {
             const slotInfo = slotLabels[item.slot] || { label: item.slot, cls: "lunch" };
             const title = lang === "hi" ? (item.hindiTitle || item.name) : item.name;
 
@@ -1468,6 +1556,9 @@ function renderAbout() {
 
 // --- 16. INITIALIZATION & EVENT LISTENERS ---
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize daily meal plan (loads today's customized or fresh new recommendation)
+  initDailyMealPlan();
+
   // Apply saved language strings
   applyStaticLanguageStrings();
 

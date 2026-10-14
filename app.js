@@ -642,6 +642,7 @@ function filterMeals(filter) {
   const lnCard = document.getElementById("lunchCard");
   const dnCard = document.getElementById("dinnerCard");
   const scrollCue = document.getElementById("scrollDownCue");
+  const shuffleBanner = document.getElementById("shuffleBannerContainer");
 
   if (filter === "all") {
     if (bfCard) bfCard.style.display = "block";
@@ -649,6 +650,7 @@ function filterMeals(filter) {
     if (dnCard) dnCard.style.display = "block";
     // Show scroll guidance cue when all 3 meals are visible
     if (scrollCue) scrollCue.style.display = "flex";
+    if (shuffleBanner) shuffleBanner.style.display = "block";
   } else {
     // Single meal mode: fits 100% on phone screen with ZERO vertical scrolling!
     if (scrollCue) scrollCue.style.display = "none";
@@ -656,14 +658,18 @@ function filterMeals(filter) {
       if (bfCard) bfCard.style.display = "block";
       if (lnCard) lnCard.style.display = "none";
       if (dnCard) dnCard.style.display = "none";
+      if (shuffleBanner) shuffleBanner.style.display = "none";
     } else if (filter === "lunch") {
       if (bfCard) bfCard.style.display = "none";
       if (lnCard) lnCard.style.display = "block";
       if (dnCard) dnCard.style.display = "none";
+      if (shuffleBanner) shuffleBanner.style.display = "none";
     } else if (filter === "dinner") {
       if (bfCard) bfCard.style.display = "none";
       if (lnCard) lnCard.style.display = "none";
       if (dnCard) dnCard.style.display = "block";
+      // On dinner, show shuffle all meals directly after dinner!
+      if (shuffleBanner) shuffleBanner.style.display = "block";
     }
   }
 }
@@ -671,15 +677,19 @@ function filterMeals(filter) {
 function scrollToNextMeal() {
   const lnCard = document.getElementById("lunchCard");
   const dnCard = document.getElementById("dinnerCard");
+  const shuffleBanner = document.getElementById("shuffleBannerContainer");
   const currentScroll = window.scrollY;
 
   const lnTop = lnCard ? lnCard.getBoundingClientRect().top + window.scrollY - 70 : 0;
   const dnTop = dnCard ? dnCard.getBoundingClientRect().top + window.scrollY - 70 : 0;
+  const shuffleTop = shuffleBanner ? shuffleBanner.getBoundingClientRect().top + window.scrollY - 70 : 0;
 
   if (currentScroll < lnTop - 60) {
     window.scrollTo({ top: lnTop, behavior: "smooth" });
   } else if (currentScroll < dnTop - 60) {
     window.scrollTo({ top: dnTop, behavior: "smooth" });
+  } else if (shuffleBanner && currentScroll < shuffleTop - 60) {
+    window.scrollTo({ top: shuffleTop, behavior: "smooth" });
   } else {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -778,20 +788,24 @@ function renderPrepList() {
 
     return `
       <div class="prep-item-clean ${item.isDone ? 'done' : ''}">
-        <div class="prep-item-click-area" onclick="togglePrepItem(${index})">
-          <div class="prep-check-bubble ${item.isDone ? 'checked' : ''}">
-            ${item.isDone ? '✓' : ''}
+        <div class="prep-item-top-row">
+          <div class="prep-item-check-group" onclick="togglePrepItem(${index})">
+            <div class="prep-check-bubble ${item.isDone ? 'checked' : ''}">
+              ${item.isDone ? '✓' : ''}
+            </div>
+            <div class="prep-header-info">
+              <h4 class="prep-item-title">${title}</h4>
+              <span class="prep-timing-badge">⏰ ${idealTime} • ${targetMeal}</span>
+            </div>
           </div>
-          <div class="prep-text-col">
-            <h4 class="prep-item-title">${title}</h4>
-            <span class="prep-timing-badge">⏰ ${idealTime} • ${targetMeal}</span>
-            <p class="prep-item-desc">${instructions}</p>
-            <span class="prep-item-why">💡 ${whyItMatters}</span>
-          </div>
+          <button class="btn-remove-prep-task" onclick="removePrepItem(${index})" title="${lang === 'hi' ? 'कार्य हटाएं' : 'Remove task'}" aria-label="Remove task">
+            ✕
+          </button>
         </div>
-        <button class="btn-remove-prep-task" onclick="removePrepItem(${index})" title="कार्य हटाएं" aria-label="Remove task">
-          ✕
-        </button>
+        <div class="prep-item-body-full" onclick="togglePrepItem(${index})">
+          <p class="prep-item-desc">${instructions}</p>
+          <span class="prep-item-why">💡 ${whyItMatters}</span>
+        </div>
       </div>
     `;
   }).join("");

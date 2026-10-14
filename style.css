@@ -1458,6 +1458,12 @@ input:checked + .slider:before {
   box-shadow: var(--shadow-card);
 }
 
+.day-plan-card-clean.today-plan-card {
+  border: 1.5px solid #10B981;
+  background: #F0FDF4;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
+}
+
 .day-header-clean {
   margin-bottom: 12px;
 }

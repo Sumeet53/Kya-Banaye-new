@@ -59,14 +59,6 @@
         </div>
       </div>
 
-      <!-- Prominent BIG SHUFFLE Button -->
-      <div class="shuffle-banner-container">
-        <button id="replanAllBtn" class="big-shuffle-btn" title="सभी भोजन बदलें">
-          <span class="shuffle-icon">🔄</span>
-          <span class="shuffle-text" id="replanBtnText">सभी व्यंजन बदलें</span>
-        </button>
-      </div>
-
       <!-- Segmented Meal Filter (Zero Vertical Scrolling in Single Meal View) -->
       <div class="segmented-meal-filter" id="mealFilterGroup">
         <button class="filter-chip active" data-filter="all" onclick="filterMeals('all')" id="filterChipAll">✨ सभी (3)</button>
@@ -97,6 +89,14 @@
         <div class="meal-card" id="dinnerCard">
           <!-- Rendered via app.js -->
         </div>
+      </div>
+
+      <!-- Prominent BIG SHUFFLE Button (Placed After Dinner) -->
+      <div class="shuffle-banner-container" id="shuffleBannerContainer">
+        <button id="replanAllBtn" class="big-shuffle-btn" title="सभी भोजन बदलें">
+          <span class="shuffle-icon">🔄</span>
+          <span class="shuffle-text" id="replanBtnText">सभी व्यंजन बदलें</span>
+        </button>
       </div>
     </section>
 

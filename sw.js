@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aaj-kya-banega-v6';
+const CACHE_NAME = 'kya-banaye-v7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

@@ -683,10 +683,10 @@ const PANTRY_ITEMS = [
 // --- 4. WEEKLY 7-DAY ROTATION ---
 const WEEKLY_PLAN = [
   { day: "Monday", dayHi: "सोमवार", themeEn: "Light & Energizing", themeHi: "हल्का व स्फूर्तिदायक", bf: 0, ln: 0, dn: 0, prep: "Soak yellow moong dal tonight for Tuesday breakfast chilla.", prepHi: "मंगलवार के चीले के लिए आज रात मूंग दाल भिगो दें।" },
-  { day: "Tuesday", dayHi: "मंगलवार", themeEn: "High Protein Day", themeHi: "उच्च प्रोटीन दिवस", bf: 1, ln: 2, dn: 1, prep: "Boil 3 potatoes tonight for Wednesday morning breakfast.", prepHi: "बुधवार के नाश्ते के लिए आज रात ३ आलू उबाल लें।" },
+  { day: "Tuesday", dayHi: "मंगलवार", themeEn: "High Protein Day", themeHi: "उच्च प्रोटीन दिवस", bf: 1, ln: 2, dn: 1, prep: "Wash and prep daliya vegetables tonight for Wednesday breakfast.", prepHi: "बुधवार के दलिया के लिए सब्ज़ियां आज रात तैयार रखें।" },
   { day: "Wednesday", dayHi: "बुधवार", themeEn: "High Fiber Midweek", themeHi: "पाचन व फाइबर दिवस", bf: 2, ln: 4, dn: 4, prep: "Wash and chop methi leaves tonight for Thursday theplas.", prepHi: "गुरुवार के थेपलों के लिए आज रात मेथी धोकर काट लें।" },
-  { day: "Thursday", dayHi: "गुरुवार", themeEn: "Digestive Rest & Detox", themeHi: "हल्का व सात्विक आहार", bf: 4, ln: 0, dn: 2, prep: "Soak Rajma in warm water tonight for Friday family feast.", prepHi: "शुक्रवार के भोजन के लिए आज रात गुनगुने पानी में राजमा भिगोएं।" },
+  { day: "Thursday", dayHi: "गुरुवार", themeEn: "Digestive Rest & Detox", themeHi: "हल्का व सात्विक आहार", bf: 4, ln: 6, dn: 2, prep: "Soak Rajma in warm water tonight for Friday family feast.", prepHi: "शुक्रवार के भोजन के लिए आज रात गुनगुने पानी में राजमा भिगोएं।" },
   { day: "Friday", dayHi: "शुक्रवार", themeEn: "Weekend Warmup", themeHi: "सप्ताहांत की तैयारी", bf: 3, ln: 1, dn: 3, prep: "Soak Kabuli Chana tonight for Saturday Chole.", prepHi: "शनिवार के छोलों के लिए आज रात काबुली चना भिगो दें।" },
-  { day: "Saturday", dayHi: "शनिवार", themeEn: "Family Flavor Fiesta", themeHi: "परिवार का पसंदीदा स्वाद", bf: 0, ln: 3, dn: 0, prep: "Set fresh curd (dahi) and check vegetables for Sunday.", prepHi: "रविवार के लिए ताज़ा मीठा दही जमाएं और सब्ज़ियां जांचें।" },
-  { day: "Sunday", dayHi: "रविवार", themeEn: "Wholesome Indulgence", themeHi: "संपूर्ण पारिवारिक भोज", bf: 1, ln: 2, dn: 1, prep: "Sort out groceries and wash leafy greens for the coming week.", prepHi: "अगले सप्ताह के लिए रसोई का सामान व्यवस्थित करें।" }
+  { day: "Saturday", dayHi: "शनिवार", themeEn: "Family Flavor Fiesta", themeHi: "परिवार का पसंदीदा स्वाद", bf: 5, ln: 3, dn: 7, prep: "Set fresh curd (dahi) and check vegetables for Sunday.", prepHi: "रविवार के लिए ताज़ा मीठा दही जमाएं और सब्ज़ियां जांचें।" },
+  { day: "Sunday", dayHi: "रविवार", themeEn: "Wholesome Indulgence", themeHi: "संपूर्ण पारिवारिक भोज", bf: 7, ln: 5, dn: 9, prep: "Sort out groceries and wash leafy greens for the coming week.", prepHi: "अगले सप्ताह के लिए रसोई का सामान और सब्ज़ियां व्यवस्थित करें।" }
 ];
